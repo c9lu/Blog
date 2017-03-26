@@ -28,12 +28,11 @@
     "angular-in-memory-web-api": "~0.1.15",
     "core-js": "^2.4.1",
     "dependency-injection-es6": "^1.2.1",
-    "highcharts": "5.0.7",
-    "mongodb": "^2.2.25",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.40",
-    "zone.js": "^0.6.26"
+    "zone.js": "^0.6.26",
+    "highcharts":"5.0.7"
   },
   "devDependencies": {
     "concurrently": "^3.1.0",
