@@ -8,7 +8,7 @@ const app = express();
 var mongoapi = require('./mongo.api.js');
 
 
-app.listen(2000, function() {
+app.listen(process.env.PORT||2000, function() {
   console.log('listening on 2000')
 
    //console.log(JSON.stringify(mongoaip.getAllPosts()));
