@@ -1,20 +1,32 @@
+import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
-
+import {RouterModule} from "@angular/router"
+import { AppComponent }  from './app.component';
+import { PostDetailComponent } from './post-detail';
+import { routing } from './AppRoutes';
+import {BlogComponent} from "./Blog.component";
+import { HttpModule, JsonpModule } from '@angular/http';
+import {rightBubbles} from "./CreateBubbles";
+import {leftBubbles} from "./CreateBubbles";
+import {BlogService} from './Blog.service';
 @NgModule({
-  declarations: [
-    AppComponent
+  imports:      [ BrowserModule ,   HttpModule,
+ //
+ routing
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [ 
+      AppComponent,
+      BlogComponent,
+      PostDetailComponent ,
+    
+       rightBubbles,
+       leftBubbles
+      
+    //  BlogAppRoutes
+    ],
+    providers:[
+      BlogService
+    ],
+  bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
