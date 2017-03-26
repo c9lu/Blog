@@ -54,7 +54,7 @@ export class BlogService {
     }  
     getPostById(id: number){
        //return  posts.find(x=> x.id==id);
-       return this.http.get('http://localhost:2000/Posts/'+id).map(
+       return this.http.get('http://localhost:2000//Posts/'+id).map(
         response=> {
         //  alert(response.json());
          return this.buildPostObjectFromJson(response.json());
