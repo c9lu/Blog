@@ -1,11 +1,20 @@
 const express = require('express');
-
+ var http = require('http');
 ObjectId = require('mongodb').ObjectID;
 
 const app = express();
-
+var server = http.createServer(app);
 
 var mongoapi = require('./mongo.api.js');
+
+
+
+app.use(function(req, res, next) {
+ // res.header("Access-Control-Allow-Origin", "*");
+///  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Content-Type', 'application/json');
+  next();
+});
 
 
 app.listen(process.env.PORT||2000, function() {
@@ -14,12 +23,6 @@ app.listen(process.env.PORT||2000, function() {
    //console.log(JSON.stringify(mongoaip.getAllPosts()));
 });
 
-app.use(function(req, res, next) {
- // res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Content-Type', 'application/json');
-  next();
-});
 //app.set('views', __dirname + '');
 //app.use('/hi', api);
 app.get('/hi', function(req, res) {
