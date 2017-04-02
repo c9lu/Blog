@@ -23,8 +23,9 @@ var AppComponent //implements OnInit
             ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
             ///<post-detail [post]="post"></post-detail>   
             ///</li>
-            template: " <div><bubble-panes-right class=\"column-right\"></bubble-panes-right></div>\n  <div class=\"column-center\"><router-outlet>\n  </router-outlet></div>\n<div class=\"column-left\">\n <bubble-panes-left></bubble-panes-left>\n \n </div>\n  ",
-            styles: ['.column-left{ float: left; width: 20%;}.column-right{ float: right; width: 20%; }.column-center{ display: inline-block; width: 60%; }']
+            moduleId: module.id,
+            templateUrl: 'app.html',
+            styleUrls: ['app.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent //implements OnInit

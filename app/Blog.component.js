@@ -42,6 +42,7 @@ var BlogComponent = (function () {
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
         var category = "";
+        // $("")
         //this function can access variables declared in the constructor like route.
         //  me.
         // alert(BlogPosts);
@@ -64,8 +65,9 @@ var BlogComponent = (function () {
             ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
             ///<post-detail [post]="post"></post-detail>   
             ///</li>
-            template: "\n  \n  <h3 [innerText]=\"name\"></h3>\n  <h1 align=\"center\">Hello {{name}} {{blog.subtitle}}</h1>\n  <div align=\"center\">\n<ul>\n    <li>\n  <a [routerLink]=\"['', 'Programming']\">   \n  <svg viewBox='0 0 105 105' height=\"150\" width=\"300\" style=\"display:block, margin:auto\">\n   <g>\n  <path d='M 0,60 \n           a 20,20 1 0,0 0,40 \n           h 50 \n           a 20,20 1 0,0 0,-40 \n           a 10,10 1 0,0 -15,-10 \n           a 15,15 1 0,0 -35,10  \n           z' fill=\"#33CAFF\"/>\n  <path d='M 45,50 \n           a 20,20 1 0,0 0,40 \n           h 50 \n           a 20,20 1 0,0 0,-40 \n           a 10,10 1 0,0 -15,-10 \n           a 15,15 1 0,0 -35,10  \n           z' fill=\"#33CAFF\"/>\n            <text fill=\"white\" text-anchor=\"middle\" y=\"75\" x=\"40\">Programming</text>\n    </g>\n    </svg>\n  </a>  \n  </li>   \n  <li>\n  \n     <a [routerLink]=\"['','Art']\" >\n    \n    <svg viewBox='150 0 105 105' height=\"150\" width=\"300\">\n   \n     <path d='M 150,60 \n           a 20,20 1 0,0 0,40 \n           h 50 \n           a 20,20 1 0,0 0,-40 \n           a 10,10 1 0,0 -15,-10 \n           a 15,15 1 0,0 -35,10  \n           z' fill=\"#33CAFF\"/>\n     <text fill=\"white\" text-anchor=\"middle\" y=\"75\" x=\"166\">Art work</text>\n    </svg>\n    </a>\n    </li>\n\n    \n    <li>Recent posts</li>\n    <li>\n  </ul>\n  </div>\n\n  <div  *ngFor=\"let post of blog.Posts\" class=\"posts\">\n  <div align=\"center\">\n      <a [routerLink]=\"['/Posts', post.id]\">\n      {{post.title}}\n      </a>\n   <br/>\n      <img src=\"Images/{{post.image}}.jpg\" width=\"250\" />\n  <br/>\n  </div>\n\n  </div>\n    \n  ",
-            styles: ['ul {list-style-type:none} li {float:left} .posts {clear:both}'],
+            moduleId: module.id,
+            templateUrl: 'blog.html',
+            styleUrls: ['blog.css'],
             providers: [Blog_service_1.BlogService, CreateBubbles_1.CreateBubbles] // the injector relies on providers to create instances of the services
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, Blog_service_1.BlogService, http_1.Http, CreateBubbles_1.CreateBubbles])

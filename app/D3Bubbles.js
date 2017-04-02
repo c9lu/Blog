@@ -27,37 +27,68 @@ var D3Bubbles = (function () {
                                                                             //  .attr("cy", function(d){return d.y});
                                            
                                  });*/
-        d3.selectAll("circle").transition().style("opacity", 1).duration(1700);
+        d3.selectAll("circle").transition().style("opacity", 0.4).duration(1700);
     };
-    D3Bubbles.prototype.Chart = function (selection, data) {
-        var div = selection;
-        this.SVGContainer = d3.select(div).append('svg').attr('width', this.Width).attr('height', this.Height);
-        //  
+    D3Bubbles.prototype.Chart = function (div, dataset, isEven) {
+        var bubble = d3.pack(dataset).size([800, 800]).padding(280);
+        this.SVGContainer = d3.select(div).append('svg')
+            .attr('width', 800)
+            .attr('height', 800)
+            .attr("class", "bubble");
         //https://jsfiddle.net/r24e8xd7/9/
-        var pack = d3.pack(data).size(this.Width, this.Width); //.padding(3);
-        //var pack = d3.layout.pack().sort(null).size([this.Width, this.Width]);
-        /*  data.children.sort(function(){return null} /*function(a,b){
-                if( a.name<b.name) return -1;
-                if(a.name>b.name) return 1;
-                return 0;
-   
-            }*/
-        // d3.packSiblings(data);
         //to append a circle to each data.
-        this.node = this.SVGContainer.selectAll("node").data(pack(d3.hierarchy(data)).descendants())
-            .enter().append('g').classed('node', true);
-        this.node.selectAll("circle").data(data.children).enter().append("circle")
-            .attr("r", function (d) { return d.radius; })
-            .style("fill", function (d) { return d.color; })
+        var nodes = d3.hierarchy(dataset).sum(function (d) { return d.frequency; });
+        this.node = this.SVGContainer.selectAll("node").data(bubble(nodes).descendants())
+            .enter()
+            .filter(function (d) {
+            return !d.children;
+        })
+            .append('g').attr("class", function () {
+            if (isEven == false) {
+                return "nodeO";
+            }
+            else {
+                return "nodeE";
+            }
+        }); //.attr("x", function(d){return d.x;})
+        this.node.transition()
+            .attr("transform", function (d) {
+            //  alert(JSON.stringify(d));
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+        ;
+        this.node.append("circle")
+            .attr("r", function (d) { return d.r; })
+            .style("fill", function (d) { return d.data.color; })
             .style("opacity", function (d) { return 1; });
-        /*    this.node.append("text").
-                attr("x", function(d){ return d.cx; })
-                .attr("y", function(d){ return d.cy + 5; })
-                .attr("text-anchor", "middle")
-                .text(function(d){ return d.name; })
-                .attr("font-size",function(d){return d.radius/3+"px";});
-          */
-        this.forceSimulation(data);
+        this.node = this.node.append("text").
+            attr("cx", function (d) {
+            return d.x;
+            //else return -d.data.x;    
+        })
+            .attr("cy", function (d) { return d.y; })
+            .attr("text-anchor", "middle")
+            .text(function (d) { return d.data.name; })
+            .attr("font-size", function (d) { return d.r / 3 + "px"; });
+        d3.selectAll("g.nodeE").transition().duration(1500)
+            .attr("transform", function (d) {
+            //  alert(JSON.stringify(d));
+            if (typeof d != 'undefined')
+                if (d.y < (400))
+                    return "translate(" + (d.x - 150) + "," + (d.y - 28) + ")";
+                else
+                    return "translate(" + (d.x - 150) + "," + (d.y + 28) + ")";
+        });
+        d3.selectAll("g.nodeO").transition().duration(1500)
+            .attr("transform", function (d) {
+            //  alert(JSON.stringify(d));
+            if (typeof d != 'undefined')
+                if (d.y < (400))
+                    return "translate(" + (d.x + 150) + "," + (d.y - 28) + ")";
+                else
+                    return "translate(" + (d.x + 150) + "," + (d.y + 28) + ")";
+        });
+        //    this.forceSimulation(data);
         /*.style({
             "fill":"black",
             "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",

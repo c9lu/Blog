@@ -1,0 +1,75 @@
+
+<h1 align="center" style="color:#ff3399">Hello {{name}} {{blog.subtitle}}</h1>
+  <div align="center">
+<ul>
+    <li>
+  <a [routerLink]="['', 'Programming']">   
+  <svg viewBox='0 0 105 105' height="150" width="300" style="display:block, margin:auto">
+   <g>
+  <path d='M 0,60 
+           a 20,20 1 0,0 0,40 
+           h 50 
+           a 20,20 1 0,0 0,-40 
+           a 10,10 1 0,0 -15,-10 
+           a 15,15 1 0,0 -35,10  
+           z' fill="#ff3399"/>
+  <path d='M 45,50 
+           a 20,20 1 0,0 0,40 
+           h 50 
+           a 20,20 1 0,0 0,-40 
+           a 10,10 1 0,0 -15,-10 
+           a 15,15 1 0,0 -35,10  
+           z' fill="#ff3399"/>
+            <text fill="white" text-anchor="middle" y="75" x="40">Programming</text>
+    </g>
+    </svg>
+  </a>  
+  </li>   
+  <li>
+  
+     <a [routerLink]="['','Art']" >
+    
+    <svg viewBox='150 0 105 105' height="150" width="300">
+   
+     <path d='M 150,60 
+           a 20,20 1 0,0 0,40 
+           h 50 
+           a 20,20 1 0,0 0,-40 
+           a 10,10 1 0,0 -15,-10 
+           a 15,15 1 0,0 -35,10  
+           z' fill="#33CAFF"/>
+     <text fill="white" text-anchor="middle" y="75" x="166">Art work</text>
+    </svg>
+    </a>
+    </li>
+
+    
+    <li>Recent posts</li>
+    <li>
+  </ul>
+  </div>
+<div>
+<ol class="pagin">
+            <li><a class="current" href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            
+</ol>
+</div>
+
+
+<div  *ngFor="let post of blog.Posts" class="posts">
+  
+    <div align="center">
+    
+        <div class="col">
+            <a [routerLink]="['/Posts', post.id]" class="p_titles">
+                {{post.title}}
+            </a>      
+            <br/>
+            <img src="Images/{{post.image}}.jpg" width="250" />
+            <br/>
+          </div> 
+    </div>
+
+</div>

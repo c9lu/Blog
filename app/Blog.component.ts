@@ -9,6 +9,8 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {CreateBubbles} from './CreateBubbles';
 
+
+
 //import { routing } from './AppRoutes';
 //import {Router, Params} from '@angular/router'
 export class Blog {
@@ -28,74 +30,14 @@ export class Blog {
   ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
    ///<post-detail [post]="post"></post-detail>   
   ///</li>
-  template: `
+ moduleId: module.id,
+  templateUrl:'blog.html',
   
-  <h3 [innerText]="name"></h3>
-  <h1 align="center">Hello {{name}} {{blog.subtitle}}</h1>
-  <div align="center">
-<ul>
-    <li>
-  <a [routerLink]="['', 'Programming']">   
-  <svg viewBox='0 0 105 105' height="150" width="300" style="display:block, margin:auto">
-   <g>
-  <path d='M 0,60 
-           a 20,20 1 0,0 0,40 
-           h 50 
-           a 20,20 1 0,0 0,-40 
-           a 10,10 1 0,0 -15,-10 
-           a 15,15 1 0,0 -35,10  
-           z' fill="#33CAFF"/>
-  <path d='M 45,50 
-           a 20,20 1 0,0 0,40 
-           h 50 
-           a 20,20 1 0,0 0,-40 
-           a 10,10 1 0,0 -15,-10 
-           a 15,15 1 0,0 -35,10  
-           z' fill="#33CAFF"/>
-            <text fill="white" text-anchor="middle" y="75" x="40">Programming</text>
-    </g>
-    </svg>
-  </a>  
-  </li>   
-  <li>
+  styleUrls:['blog.css']
+                
+,
   
-     <a [routerLink]="['','Art']" >
-    
-    <svg viewBox='150 0 105 105' height="150" width="300">
-   
-     <path d='M 150,60 
-           a 20,20 1 0,0 0,40 
-           h 50 
-           a 20,20 1 0,0 0,-40 
-           a 10,10 1 0,0 -15,-10 
-           a 15,15 1 0,0 -35,10  
-           z' fill="#33CAFF"/>
-     <text fill="white" text-anchor="middle" y="75" x="166">Art work</text>
-    </svg>
-    </a>
-    </li>
-
-    
-    <li>Recent posts</li>
-    <li>
-  </ul>
-  </div>
-
-  <div  *ngFor="let post of blog.Posts" class="posts">
-  <div align="center">
-      <a [routerLink]="['/Posts', post.id]">
-      {{post.title}}
-      </a>
-   <br/>
-      <img src="Images/{{post.image}}.jpg" width="250" />
-  <br/>
-  </div>
-
-  </div>
-    
-  `
-  ,
-  styles:['ul {list-style-type:none} li {float:left} .posts {clear:both}'], 
+ 
     providers:[BlogService, CreateBubbles] // the injector relies on providers to create instances of the services
 })
 export class BlogComponent implements OnInit
@@ -122,6 +64,8 @@ constructor(private router:ActivatedRoute, private blogService:BlogService , pri
     let me = this;
 
     let category= "";
+
+   // $("")
 
     
     //this function can access variables declared in the constructor like route.

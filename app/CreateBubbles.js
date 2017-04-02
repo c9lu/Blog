@@ -43,8 +43,13 @@ var CreateBubbles = (function () {
             var color = this.getRandomColor();
             if (index % 2 == 0 && this.isEven == true || index % 2 == 1 && this.isEven == false) {
                 data.children.push({
-                    "cx": randomNumberX + 50, "cy": randomNumberY, "radius": frequency * 50,
-                    "color": color, "name": element.toString()
+                    /*"cx": randomNumberX, "cy":randomNumberY,"radius": frequency*50, */
+                    "frequency": frequency * 2,
+                    "color": color, "name": "#" + element.toString()
+                });
+                data.children.push({
+                    "frequency": 1,
+                    "color": color, "name": ""
                 });
             }
             index++;
@@ -57,7 +62,7 @@ var CreateBubbles = (function () {
         var _this = this;
         this.blogService.getAllPostsTags_Frequency().subscribe(function (val) {
             _this.Data = _this.getD3Data(val);
-            new D3Bubbles_1.D3Bubbles().SetWidth(500).SetHeight(800).Chart(_this.div.nativeElement, _this.Data);
+            new D3Bubbles_1.D3Bubbles().SetWidth(500).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
         });
     };
     __decorate([

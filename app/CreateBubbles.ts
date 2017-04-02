@@ -52,10 +52,16 @@ export class CreateBubbles{
          
             if(index%2==0 && this.isEven==true ||  index%2==1 && this.isEven==false){
                 data.children.push({
-                          "cx": randomNumberX+50, "cy":randomNumberY,"radius": frequency*50,
-                          "color":color, "name":element.toString()
+                          /*"cx": randomNumberX, "cy":randomNumberY,"radius": frequency*50, */
+                          "frequency":frequency*2,
+                          "color":color, "name":"#"+element.toString()
                           //name: element.toString(), 
                        });
+               data.children.push({
+                      "frequency":1,
+                      "color":color, "name":""
+
+               })
             }
                index++;
         }
@@ -76,7 +82,7 @@ export class CreateBubbles{
 
               this.Data= this.getD3Data(val);
            
-            new D3Bubbles().SetWidth(500).SetHeight(800).Chart(this.div.nativeElement, this.Data);
+            new D3Bubbles().SetWidth(500).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
       
             
 

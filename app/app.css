@@ -1,0 +1,25 @@
+.column-left
+{ 
+    float: left; 
+    width: 25%;  
+    background-color:black
+} 
+.column-right
+{ 
+    float: right; 
+    background-color:black
+}
+.rightdiv
+{ 
+    float:right; 
+    width: 25%; 
+    background-color:black
+} 
+.column-center
+{ 
+    display: inline-block; 
+    width: 50%; 
+    z-index:0; 
+    opacity:1;
+    background-color:black
+}

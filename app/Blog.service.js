@@ -52,7 +52,7 @@ var BlogService = (function () {
     BlogService.prototype.getPostById = function (id) {
         var _this = this;
         //return  posts.find(x=> x.id==id);
-        return this.http.get('http://localhost:2000//Posts/' + id).map(function (response) {
+        return this.http.get('http://localhost:5000/Posts/' + id).map(function (response) {
             //  alert(response.json());
             return _this.buildPostObjectFromJson(response.json());
         });
@@ -63,13 +63,13 @@ var BlogService = (function () {
     };
     BlogService.prototype.getAllPostsTags_Frequency = function () {
         var _this = this;
-        return this.http.get('http://localhost:2000/').map(function (response) {
+        return this.http.get('http://localhost:5000/').map(function (response) {
             return _this.retrieveTagsFrequencyFromPosts(response.json());
         });
     };
     BlogService.prototype.getAllPosts = function () {
         var _this = this;
-        return this.http.get('http://localhost:2000/').map(function (response) {
+        return this.http.get('http://localhost:5000/').map(function (response) {
             return _this.buildPostObjectsFromJson(response.json());
         });
     };

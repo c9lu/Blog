@@ -9,15 +9,9 @@ import {leftBubbles} from './CreateBubbles';
   ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
    ///<post-detail [post]="post"></post-detail>   
   ///</li>
-  template: ` <div><bubble-panes-right class="column-right"></bubble-panes-right></div>
-  <div class="column-center"><router-outlet>
-  </router-outlet></div>
-<div class="column-left">
- <bubble-panes-left></bubble-panes-left>
- 
- </div>
-  `,
-  styles:['.column-left{ float: left; width: 20%;}.column-right{ float: right; width: 20%; }.column-center{ display: inline-block; width: 60%; }']
+  moduleId: module.id,
+  templateUrl: 'app.html',
+  styleUrls:['app.css']
 })
 export class AppComponent //implements OnInit
 { 

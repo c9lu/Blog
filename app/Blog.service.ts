@@ -54,7 +54,7 @@ export class BlogService {
     }  
     getPostById(id: number){
        //return  posts.find(x=> x.id==id);
-       return this.http.get('http://localhost:2000//Posts/'+id).map(
+       return this.http.get('http://localhost:5000/Posts/'+id).map(
         response=> {
         //  alert(response.json());
          return this.buildPostObjectFromJson(response.json());
@@ -71,14 +71,14 @@ export class BlogService {
     }
     getAllPostsTags_Frequency(){
       
-        return this.http.get('http://localhost:2000/').map(response=>{
+        return this.http.get('http://localhost:5000/').map(response=>{
            
             return this.retrieveTagsFrequencyFromPosts(response.json());
         });
     }
     getAllPosts()
     {
-           return this.http.get('http://localhost:2000/').map(response=>{
+           return this.http.get('http://localhost:5000/').map(response=>{
            
               return this.buildPostObjectsFromJson(response.json());
 
