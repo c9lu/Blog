@@ -1,19 +1,21 @@
 
-<div class="column-left">
-   <div> 
-       <bubble-panes-left></bubble-panes-left>
-    </div>
- 
- </div>
 
+<div class="container">
+    <div class="column-left">
+   
+       <bubble-panes-left></bubble-panes-left>
+     
+    </div>
+    <div class="column-right"> 
+
+         <bubble-panes-right></bubble-panes-right>
+    
+    </div>
+</div>
 <div class="column-center">
     <router-outlet>
     </router-outlet>
 </div>
 
-<div class="rightdiv"> 
-     <div  class="column-right">
-         <bubble-panes-right></bubble-panes-right>
-     </div>
-</div>
-  
+
+<div style="clear:left"></div>

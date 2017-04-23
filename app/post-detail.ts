@@ -6,27 +6,25 @@ import {Blog} from './Blog.component';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Params , Router} from '@angular/router';
-import {BlogPosts} from './blog.datasource';
+
 //import {Injectable} from 'angular'
 @Component({
     selector:'post-detail',
 
-    animations:[
+   /* animations:[
     trigger('showPosts', [       
         state('shown', style({opacity: 1})),
         state('hidden', style({opacity: 0})),
         transition('shown => hidden', animate('1000ms')),    
         transition('hidden => shown', animate('1000ms'))                           
     ])
-    ],
-    template:`<div [@showPosts]="visibility">,
-
-            <h2>{{post?.title}}</h2>
-            <br/>
-            <h1>{{post?.content}}</h1>
-            </div>
-
-            `, 
+    ],*/
+    template:`<div style="padding-left:10px; padding-right:10px;">
+    <p style="font-size:22px; color:white;font-family:Calibri">{{post?.title}}</p>
+    <p style="font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
+    <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px"></div></div>`,
+ 
+    
     providers:[BlogService]
     
         
@@ -34,47 +32,46 @@ import {BlogPosts} from './blog.datasource';
 
 export class PostDetailComponent implements OnInit{
         @Input() post: Post;
-        visibility = 'hidden'
-
+        
+       
+        myTemplate=''
         constructor(private blogService:BlogService, private route: ActivatedRoute){
         }
               
              
-             //  ( blogService.getPostById(id).subscribe
-  //              .subscribe(post=>me.post = post
-             //   );
-        //      this.route.params.switchMap((params: Params) => 
-          //   blogService.getPostById(+params['id'])).subscribe((post:Post)=>this.post = post)
-
-          
+   
         
         ngOnInit(){ 
-                let me = this;
-               //  me.route.params.subscribe(params => {
-                  let id=0;
-                  //the params is from ActivatedRoute
-                 let posts: Post[] 
-                // posts = new Blog().Posts;
+                let me = this;            
+                let id=0;
+                let posts: Post[] 
+              
                
-               // posts = BlogPosts
              
                   me.route.params.subscribe(params =>
                  {
-                          id= params['id'];   
-                          if (id==null){
-                               
-                          }
-                          else{
+                       id= params['id'];   
+                        
+                       $(".column-left").css("z-index", -1);
+                       $(".column-right").css("z-index", -1);
+
+                        $.get('./_posts/post'+id+'.html', function(html_string){
+                           me.myTemplate = html_string;
+                      
+                        })
+
+                        if (id!=null)
+                        {
                                me.blogService.getPostById(id).subscribe(p=>{
                                        me.post=p;
+                                  
                                 });
-                           } });
+                           } 
+                });
         
             
                 
-                setTimeout(function () {
-                        me.visibility = 'shown';
-                },500);                
+                        
         }
 }
 

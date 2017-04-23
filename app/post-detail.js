@@ -18,34 +18,25 @@ var PostDetailComponent = (function () {
     function PostDetailComponent(blogService, route) {
         this.blogService = blogService;
         this.route = route;
-        this.visibility = 'hidden';
+        this.myTemplate = '';
     }
-    //  ( blogService.getPostById(id).subscribe
-    //              .subscribe(post=>me.post = post
-    //   );
-    //      this.route.params.switchMap((params: Params) => 
-    //   blogService.getPostById(+params['id'])).subscribe((post:Post)=>this.post = post)
     PostDetailComponent.prototype.ngOnInit = function () {
         var me = this;
-        //  me.route.params.subscribe(params => {
         var id = 0;
-        //the params is from ActivatedRoute
         var posts;
-        // posts = new Blog().Posts;
-        // posts = BlogPosts
         me.route.params.subscribe(function (params) {
             id = params['id'];
-            if (id == null) {
-            }
-            else {
+            $(".column-left").css("z-index", -1);
+            $(".column-right").css("z-index", -1);
+            $.get('./_posts/post' + id + '.html', function (html_string) {
+                me.myTemplate = html_string;
+            });
+            if (id != null) {
                 me.blogService.getPostById(id).subscribe(function (p) {
                     me.post = p;
                 });
             }
         });
-        setTimeout(function () {
-            me.visibility = 'shown';
-        }, 500);
     };
     __decorate([
         core_1.Input(), 
@@ -54,15 +45,15 @@ var PostDetailComponent = (function () {
     PostDetailComponent = __decorate([
         core_1.Component({
             selector: 'post-detail',
-            animations: [
-                core_1.trigger('showPosts', [
-                    core_1.state('shown', core_1.style({ opacity: 1 })),
-                    core_1.state('hidden', core_1.style({ opacity: 0 })),
-                    core_1.transition('shown => hidden', core_1.animate('1000ms')),
-                    core_1.transition('hidden => shown', core_1.animate('1000ms'))
-                ])
-            ],
-            template: "<div [@showPosts]=\"visibility\">,\n\n            <h2>{{post?.title}}</h2>\n            <br/>\n            <h1>{{post?.content}}</h1>\n            </div>\n\n            ",
+            /* animations:[
+             trigger('showPosts', [
+                 state('shown', style({opacity: 1})),
+                 state('hidden', style({opacity: 0})),
+                 transition('shown => hidden', animate('1000ms')),
+                 transition('hidden => shown', animate('1000ms'))
+             ])
+             ],*/
+            template: "<div style=\"padding-left:10px; padding-right:10px;\">\n    <p style=\"font-size:22px; color:white;font-family:Calibri\">{{post?.title}}</p>\n    <p style=\"font-size:18px; color:white; font-family:Calibri\">Written on {{post?.createdate}}</p>\n    <div [innerHtml]=\"myTemplate\" style=\"color:white;font-family:Calibri; font-size:17px\"></div></div>",
             providers: [Blog_service_1.BlogService]
         }), 
         __metadata('design:paramtypes', [Blog_service_1.BlogService, router_1.ActivatedRoute])

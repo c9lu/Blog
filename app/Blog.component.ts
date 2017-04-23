@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
 import {Post} from './post';
-import {PostDetailComponent} from './post-detail';
-import {OnInit} from '@angular/core';
+
+import {OnInit, Directive} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BlogService} from './Blog.service';
-import {BlogPosts} from './blog.datasource';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {CreateBubbles} from './CreateBubbles';
+var $ = require("jquery");
 
 
-
-//import { routing } from './AppRoutes';
-//import {Router, Params} from '@angular/router'
 export class Blog {
 
   subtitle: string;
-  tags:Array<string>;
 
   Posts : Post[];
 
@@ -27,64 +23,84 @@ export class Blog {
 
 @Component({
   selector: 'blogs-list',
-  ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
-   ///<post-detail [post]="post"></post-detail>   
-  ///</li>
- moduleId: module.id,
-  templateUrl:'blog.html',
-  
-  styleUrls:['blog.css']
-                
-,
-  
- 
-    providers:[BlogService, CreateBubbles] // the injector relies on providers to create instances of the services
+
+  moduleId: module.id,
+  templateUrl:'blog.html',  
+  styleUrls:['blog.css'],
+  providers:[BlogService, CreateBubbles] // the injector relies on providers to create instances of the services
 })
 export class BlogComponent implements OnInit
 { 
   name = 'guest'; 
   title = 'this is my blog';
-  
  
  blog: Blog={
-    subtitle: 'what am i up to?',
-    tags: ["post1","post2"],
-    Posts:[]// [{id: 1, title:"abc", content:"dfa", category:"Art"}, 
-   // {id:2, title:"post 2", content:"post 2 content", category:"Programming"}]
+    subtitle: "Hello guest, what am I up to?",
+  
+    Posts:[]
   }
+    
+constructor(private activatedRoute:ActivatedRoute, private router:Router ,private blogService:BlogService , private http: Http, private bubbleCreator:CreateBubbles){
 
-constructor(private router:ActivatedRoute, private blogService:BlogService , private http: Http, private bubbleCreator:CreateBubbles){
-
- // this.route = Router;
-  //  this.
+ 
 }
 
+ 
+
+ ngAfterViewInit(){
+   let me= this;
+  setTimeout(function(){
+ 
+    $(".bubbles").click(function(e){
+
+    
+      var tag = $(this).attr('id');
+     
+      me.router.navigate(['/Tags', tag]);
+
+
+    })
+   },1000);
+ }
 
   ngOnInit(){ 
     let me = this;
 
-    let category= "";
+    let id= "";
 
-   // $("")
+        
+     
 
-    
-    //this function can access variables declared in the constructor like route.
-  //  me.
-  // alert(BlogPosts);
-  
-    //me.bubbleCreator.getSeriesData();
-    me.router.params.subscribe(params => {
-        category = params["category"];
+    me.activatedRoute.params.subscribe(params => {
+        id = params["id"];
+        $(".column-left").css("z-index", 0);
+        $(".column-right").css("z-index", 0);
+         
+        if(me.router.url.indexOf('Tags')>0)
+       {
+          var result = me.blogService.GetPostsFromTagName(id);
+          
+          if(typeof result!='undefined' && result!=null){
+            result.subscribe(val=> { 
+          
+                me.blog.Posts = val  })
 
-        if( category != null && category!=""){
-         // alert(category);
-         me.blog.Posts = me.blogService.getPostsByCategory(BlogPosts, category);
-
+          }
+          else{
+             me.router.navigate(['']) 
+          }
+       }
+        else if( id!= null && id!=""){
+        
+      
+          me.blogService.getPostsByCategory(id).subscribe(val=> { me.blog.Posts = val} );
         }
         else {
-       
-
-           me.blogService.getAllPosts().subscribe(val=> { me.blog.Posts = val});;
+          
+           me.blogService.getAllPosts().subscribe(val=> { me.blog.Posts = val
+              
+            
+          });
           
         }
 
@@ -92,6 +108,6 @@ constructor(private router:ActivatedRoute, private blogService:BlogService , pri
 
   }
 
- // ngOnInit():void{alert("hello")}
+
  
 }

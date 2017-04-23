@@ -1,75 +1,103 @@
 
-<h1 align="center" style="color:#ff3399">Hello {{name}} {{blog.subtitle}}</h1>
-  <div align="center">
-<ul>
-    <li>
-  <a [routerLink]="['', 'Programming']">   
-  <svg viewBox='0 0 105 105' height="150" width="300" style="display:block, margin:auto">
-   <g>
-  <path d='M 0,60 
+<p align="center" style="color:orange; font-family:segoe print;">Note you can filter the posts by clicking on the #tags in the bubbles or by clicking on the clouds below</p>
+<div align="center" style="width:100%; position:relative; display: inline-block ">
+<ul align="center">
+ <li>
+  
+       <a [routerLink]="['/Category/programming']">
+    
+        <svg viewBox='20 0 105 105' height="150" width="250">
+   
+         <path d='M 15,60 
            a 20,20 1 0,0 0,40 
            h 50 
            a 20,20 1 0,0 0,-40 
            a 10,10 1 0,0 -15,-10 
            a 15,15 1 0,0 -35,10  
            z' fill="#ff3399"/>
-  <path d='M 45,50 
+
+          <path d='M 45,50 
            a 20,20 1 0,0 0,40 
            h 50 
            a 20,20 1 0,0 0,-40 
            a 10,10 1 0,0 -15,-10 
            a 15,15 1 0,0 -35,10  
            z' fill="#ff3399"/>
-            <text fill="white" text-anchor="middle" y="75" x="40">Programming</text>
-    </g>
+
+            <text fill="white" text-anchor="middle" y="75" x="45">Programming</text>
     </svg>
-  </a>  
-  </li>   
+    </a> 
+  </li>
+     
   <li>
   
-     <a [routerLink]="['','Art']" >
+     <a [routerLink]="['/Category/art']" >
     
-    <svg viewBox='150 0 105 105' height="150" width="300">
+    <svg viewBox='30 0 105 105' height="165" width="230">
    
-     <path d='M 150,60 
+     <path d='M 30,60 
            a 20,20 1 0,0 0,40 
            h 50 
            a 20,20 1 0,0 0,-40 
            a 10,10 1 0,0 -15,-10 
            a 15,15 1 0,0 -35,10  
            z' fill="#33CAFF"/>
-     <text fill="white" text-anchor="middle" y="75" x="166">Art work</text>
+     <text fill="white" text-anchor="middle" y="85" x="50">Art
+       </text>
     </svg>
     </a>
     </li>
-
+    <!--<li>
+         <a [routerLink]="['','Art']" >
     
-    <li>Recent posts</li>
-    <li>
+        <svg viewBox='20 0 105 105' height="150" width="250">
+   
+          <path d='M 10,60 
+            a 20,20 1 0,0 0,40 
+           h 50 
+           a 20,20 1 0,0 0,-40 
+           a 10,10 1 0,0 -15,-10 
+           a 15,15 1 0,0 -35,10  
+           z' fill="orange"/>
+         <path d='M 25,50 
+           a 20,20 1 0,0 0,40 
+           h 50 
+           a 20,20 1 0,0 0,-40 
+           a 10,10 1 0,0 -15,-10 
+           a 15,15 1 0,0 -35,10  
+           z' fill="orange"/>
+     <text fill="white" text-anchor="middle" y="75" x="40">About</text>
+    </svg>
+    </a>
+
+
+    </li>
+  -->
   </ul>
   </div>
-<div>
-<ol class="pagin">
-            <li><a class="current" href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
+ 
+
+
+<div align="center" style="clear:both">
+
+ 
+    <ul class="columnList">
+        <li  *ngFor="let post of blog.Posts; let i=index " class="blocks"> 
             
-</ol>
-</div>
-
-
-<div  *ngFor="let post of blog.Posts" class="posts">
-  
-    <div align="center">
-    
-        <div class="col">
-            <a [routerLink]="['/Posts', post.id]" class="p_titles">
-                {{post.title}}
-            </a>      
-            <br/>
-            <img src="Images/{{post.image}}.jpg" width="250" />
-            <br/>
-          </div> 
-    </div>
-
-</div>
+              <br/>
+            <figure style="position:relative">
+                <img src="Images/{{post.image}}.jpg"  style="display:block; width:70%" *ngIf="post.image"/>
+                <figcaption >
+                    <span class ="caption" >   <a [routerLink]="['/Posts', post.id]">
+                    <span style="color:white"> {{post.title}}</span>
+                </a> 
+                      
+                      <span class="innerspan"></span></span>
+                
+                </figcaption>
+            </figure>
+          
+        </li>       
+    </ul>
+ </div>      
+       

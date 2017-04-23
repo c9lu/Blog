@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var PostDetailComponent = (function () {
     function PostDetailComponent() {
     }
+    PostDetailComponent.prototype.ngOnInit = function () {
+    };
     PostDetailComponent = __decorate([
         core_1.Component({
             selector: 'post-detail',
-            template: '<div> <h2>{{post.title}}</h2></div>',
+            template: '<div> <h2 style="color:white">{{post.title}}</h2></div>',
         }), 
         __metadata('design:paramtypes', [])
     ], PostDetailComponent);

@@ -1,9 +1,7 @@
-
-
 import {Component, ElementRef, ViewChild} from '@angular/core';
 
 import 'rxjs/add/operator/map';
-///<reference path="../node_modules/d3/build/d3.js"/>
+
 
 
 var d3 = require("d3");
@@ -47,15 +45,14 @@ export class CreateBubbles{
          
             var randomNumberX = Math.random() * 200;
             var randomNumberY = Math.random()*700;
-            var frequency = val[element];
+            var frequency = val[element].count;
             var color = this.getRandomColor();
          
-            if(index%2==0 && this.isEven==true ||  index%2==1 && this.isEven==false){
+            if(index % 2==0 && this.isEven==true ||  index % 2==1 && this.isEven==false){
                 data.children.push({
-                          /*"cx": randomNumberX, "cy":randomNumberY,"radius": frequency*50, */
-                          "frequency":frequency*2,
+                          "frequency":frequency*2.5,
                           "color":color, "name":"#"+element.toString()
-                          //name: element.toString(), 
+                        
                        });
                data.children.push({
                       "frequency":1,
@@ -81,10 +78,12 @@ export class CreateBubbles{
         this.blogService.getAllPostsTags_Frequency().subscribe(val=>{
 
               this.Data= this.getD3Data(val);
-           
-            new D3Bubbles().SetWidth(500).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
-      
-            
+           if(this.isEven==true)
+                new D3Bubbles().SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+            else
+                new D3Bubbles().SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+    
+                
 
          });
      

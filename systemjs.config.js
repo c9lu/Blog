@@ -6,7 +6,8 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/',
+     
     },
     // map tells the System loader where to look for things
     map: {
@@ -38,7 +39,11 @@
      //'modules':''
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'dependency-injection-es6':'npm:dependency-injection-es6/index.js',
-      'container':'npm:dependency-injection-es6/src/container.js'
+      'container':'npm:dependency-injection-es6/src/container.js',
+      'jquery':'npm:jquery/dist/jquery.js',
+      'paginaton':'npm:twbs-pagination-1.4.1/jquery.twbsPagination.js',
+      
+      
     //  'container':'npm:de'
 
     },

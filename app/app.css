@@ -1,25 +1,47 @@
+
 .column-left
+
 { 
-    float: left; 
-    width: 25%;  
-    background-color:black
+
+    width:25%;
+    background-color:black;
+    left:0;
+    position:fixed;
+    
+    
 } 
+
 .column-right
+
 { 
-    float: right; 
-    background-color:black
+
+     background-color:black;
+     width:25%;
+     right:0;
+     position:fixed;
+     
 }
-.rightdiv
-{ 
-    float:right; 
-    width: 25%; 
-    background-color:black
-} 
+
+.container
+{
+    width:50%;
+    margin:0 auto;
+    position:relative;
+    
+
+}
+
+
 .column-center
+
 { 
-    display: inline-block; 
-    width: 50%; 
+    
     z-index:0; 
     opacity:1;
-    background-color:black
+    margin-left:25%;
+    background-color:black;
+    margin-right:25%;
+   
+
 }
+

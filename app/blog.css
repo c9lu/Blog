@@ -1,16 +1,26 @@
 ul {list-style-type:none} 
-li {float:left} 
+li {display:inline-block; text-decoration:none;  } 
 .posts {clear:both} 
 .pagin {
-      margin: 0;
-      padding: 0;
+     
+      margin-top:10px;
+      
      list-style-type: none;
+     
+    
+        
 
     }  
 .pagin li
 { 
-    counter-increment: step-counter;
+   counter-increment: step-counter;
     margin-bottom: 10px;
+     cursor: pointer; cursor: hand;
+     display:inline;
+}
+a{
+    text-decoration: none;
+   
 }
 
 .pagin li::before {
@@ -22,4 +32,63 @@ li {float:left}
   font-weight: bold;
   padding: 3px 8px;
   border-radius: 3px;
-}            
+} 
+text{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
+}
+.columnList{
+    
+ 
+    -webkit-columns: 400px;
+    -moz-columns: 1 400px;
+    columns: 1 400px; 
+    
+}           
+.blocks{
+    display:block;
+
+}
+.col{
+
+    font-size: 20px;
+    font-family: fantasy;
+ 
+   
+
+}
+.col a {
+color:yellowgreen;
+
+}
+.caption {
+    color: white;
+    background:#ff3399; /* fallback */
+  
+    padding: .5em;
+    padding-left:15px;
+  text-decoration:none;  
+ /*  padding: 0 5px;
+  */
+        
+    
+}
+
+.innerspan{
+     padding: 0 5px;
+      background: transparent;
+
+}
+
+figcaption {
+  position: absolute;
+  bottom: 10%;
+  width: 100%; 
+ font-family:Courier New, Courier, monospace;
+
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 150%;
+text-transform: capitalize;
+
+}

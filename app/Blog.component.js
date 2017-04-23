@@ -11,12 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var Blog_service_1 = require('./Blog.service');
-var blog_datasource_1 = require('./blog.datasource');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var CreateBubbles_1 = require('./CreateBubbles');
-//import { routing } from './AppRoutes';
-//import {Router, Params} from '@angular/router'
+var $ = require("jquery");
 var Blog = (function () {
     function Blog() {
     }
@@ -24,7 +22,8 @@ var Blog = (function () {
 }());
 exports.Blog = Blog;
 var BlogComponent = (function () {
-    function BlogComponent(router, blogService, http, bubbleCreator) {
+    function BlogComponent(activatedRoute, router, blogService, http, bubbleCreator) {
+        this.activatedRoute = activatedRoute;
         this.router = router;
         this.blogService = blogService;
         this.http = http;
@@ -32,45 +31,56 @@ var BlogComponent = (function () {
         this.name = 'guest';
         this.title = 'this is my blog';
         this.blog = {
-            subtitle: 'what am i up to?',
-            tags: ["post1", "post2"],
-            Posts: [] // [{id: 1, title:"abc", content:"dfa", category:"Art"}, 
+            subtitle: "Hello guest, what am I up to?",
+            Posts: []
         };
-        // this.route = Router;
-        //  this.
     }
+    BlogComponent.prototype.ngAfterViewInit = function () {
+        var me = this;
+        setTimeout(function () {
+            $(".bubbles").click(function (e) {
+                var tag = $(this).attr('id');
+                me.router.navigate(['/Tags', tag]);
+            });
+        }, 1000);
+    };
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
-        var category = "";
-        // $("")
-        //this function can access variables declared in the constructor like route.
-        //  me.
-        // alert(BlogPosts);
-        //me.bubbleCreator.getSeriesData();
-        me.router.params.subscribe(function (params) {
-            category = params["category"];
-            if (category != null && category != "") {
-                // alert(category);
-                me.blog.Posts = me.blogService.getPostsByCategory(blog_datasource_1.BlogPosts, category);
+        var id = "";
+        me.activatedRoute.params.subscribe(function (params) {
+            id = params["id"];
+            $(".column-left").css("z-index", 0);
+            $(".column-right").css("z-index", 0);
+            if (me.router.url.indexOf('Tags') > 0) {
+                var result = me.blogService.GetPostsFromTagName(id);
+                if (typeof result != 'undefined' && result != null) {
+                    result.subscribe(function (val) {
+                        me.blog.Posts = val;
+                    });
+                }
+                else {
+                    me.router.navigate(['']);
+                }
+            }
+            else if (id != null && id != "") {
+                me.blogService.getPostsByCategory(id).subscribe(function (val) { me.blog.Posts = val; });
             }
             else {
-                me.blogService.getAllPosts().subscribe(function (val) { me.blog.Posts = val; });
-                ;
+                me.blogService.getAllPosts().subscribe(function (val) {
+                    me.blog.Posts = val;
+                });
             }
         });
     };
     BlogComponent = __decorate([
         core_1.Component({
             selector: 'blogs-list',
-            ////<li *ngFor =" let post of Posts"><span>{{post.title}}</span>
-            ///<post-detail [post]="post"></post-detail>   
-            ///</li>
             moduleId: module.id,
             templateUrl: 'blog.html',
             styleUrls: ['blog.css'],
             providers: [Blog_service_1.BlogService, CreateBubbles_1.CreateBubbles] // the injector relies on providers to create instances of the services
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, Blog_service_1.BlogService, http_1.Http, CreateBubbles_1.CreateBubbles])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, Blog_service_1.BlogService, http_1.Http, CreateBubbles_1.CreateBubbles])
     ], BlogComponent);
     return BlogComponent;
 }());
