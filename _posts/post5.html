@@ -1,0 +1,11 @@
+
+				<div class="entry-content">
+			<p>One of the challenges I had with JavaScript is asynchronous programming. Coming from a C# programming background, I am used to seeing code being executed in order. So sometimes when JavaScript doesn’t behave the same way, it becomes a little unpredictable for me.</p>
+<p>Prior to Bluebird, I have used .when,&nbsp; .done, .setTimeout to deal with its asynchronous behaviors. Although these methods work, but I find the code can get messy, especially for nested successful callbacks. Since IE11 does not support ECMASCRIPT 6 (which comes with built in promise object), so Bluebird came to the rescue.</p>
+<p>The Bluebird built in method Promise.promisify takes in a function variable and returns a promise object; it then chains the subsequent functions you would like to execute, and if any of the functions throw an error, you can catch all of them at once (see lines 8 to 10 below); what is even more effective is that it can execute subsequent code whether there was an error or not (see lines 11-13 below).</p>
+<p><a href="https://c9lu508.files.wordpress.com/2016/11/image.png"><img title="image" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="image" src="https://c9lu508.files.wordpress.com/2016/11/image_thumb.png?w=485&amp;h=289" width="485" height="289"></a></p>
+<p>Of courses there are cases when we want to execute several methods at once, in this case we use the built in method Promise.all() like below;&nbsp; func1 and func2 run simultaneously,&nbsp; func3 will only execute once func1 and func2 are done.</p>
+<p><a href="https://c9lu508.files.wordpress.com/2016/11/image1.png"><img title="image" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" border="0" alt="image" src="https://c9lu508.files.wordpress.com/2016/11/image_thumb1.png?w=535&amp;h=248" width="535" height="248"></a></p>
+					</div><!-- .entry-content -->
+	
+	
