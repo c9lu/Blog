@@ -57,7 +57,7 @@ export class D3Bubbles{
             });;
       
      this.node.append("circle")
-                .attr("r", function (d) { return d.r; })
+                .attr("r", function (d) { return d.r*1.1; })
                    .style("fill", function(d) { return d.data.color; })
                    .style("opacity", function(d){return 1})
                   
