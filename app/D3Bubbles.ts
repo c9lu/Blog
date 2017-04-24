@@ -76,7 +76,7 @@ export class D3Bubbles{
             .attr("class", "bubbles")
             .style("cursor","pointer")            
             .text(function(d){ return d.data.name; })
-            .attr("font-size",function(d){return d.r/3+"px";})
+            .attr("font-size",function(d){return d.r/2.3+"px";})
             .attr("font-family","'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
 
         
