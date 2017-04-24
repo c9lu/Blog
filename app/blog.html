@@ -84,8 +84,8 @@
     <ul class="columnList">
         <li  *ngFor="let post of blog.Posts; let i=index " class="blocks"> 
              
-            <figure style="position:relative; margin-top:25px">
-                <img src="Images/{{post.image}}.jpg"  style="display:block; width:70%" *ngIf="post.image"/>
+            <figure style="position:relative; margin-bottom:20px;">
+                <img src="Images/{{post.image}}.jpg"  onerror="this.onerror=null;this.src='Images/3_c.jpg'" style="display:block; width:70%"/>
                 <figcaption >
                     <span class ="caption" >   <a [routerLink]="['/Posts', post.id]">
                     <span style="color:white"> {{post.title}}</span>
