@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 
 var d3 = require("d3");
+var d3Result;
 
 
 import {BlogService} from './Blog.service'; //import is from ES6.
@@ -75,7 +76,9 @@ export class CreateBubbles{
      }
      ngAfterViewInit(){
     
-        this.blogService.getAllPostsTags_Frequency().subscribe(val=>{
+          d3Result =  this.blogService.getAllPostsTags_Frequency()
+          if(d3Result!=null){
+          d3Result.subscribe(val=>{
 
               this.Data= this.getD3Data(val);
            if(this.isEven==true)
@@ -86,6 +89,7 @@ export class CreateBubbles{
                 
 
          });
+          }
      
      }
 }

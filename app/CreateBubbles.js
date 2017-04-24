@@ -16,6 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 require('rxjs/add/operator/map');
 var d3 = require("d3");
+var d3Result;
 var Blog_service_1 = require('./Blog.service'); //import is from ES6.
 var D3Bubbles_1 = require('./D3Bubbles');
 var CreateBubbles = (function () {
@@ -58,13 +59,16 @@ var CreateBubbles = (function () {
     };
     CreateBubbles.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.blogService.getAllPostsTags_Frequency().subscribe(function (val) {
-            _this.Data = _this.getD3Data(val);
-            if (_this.isEven == true)
-                new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
-            else
-                new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
-        });
+        d3Result = this.blogService.getAllPostsTags_Frequency();
+        if (d3Result != null) {
+            d3Result.subscribe(function (val) {
+                _this.Data = _this.getD3Data(val);
+                if (_this.isEven == true)
+                    new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+                else
+                    new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+            });
+        }
     };
     __decorate([
         core_1.ViewChild('container'), 
