@@ -105,4 +105,41 @@ color:orange; font-family:segoe print; display:block
 
 @media screen and (min-width: 0px) and (max-width: 500px) {
  .orangeText{display:none}
+
+ 
+.caption {
+    color: white;
+    background:#ff3399; /* fallback */
+  
+    padding: .2em;
+    padding-left:0px;
+  text-decoration:none;  
+ /*  padding: 0 5px;
+  */
+          float:left;
+    
+}
+.blogimages{
+
+    display:none;
+}
+.innerspan{
+     padding: 0 4px;
+      background: transparent;
+
+}
+
+figcaption {
+  position: absolute;
+  bottom: 10%;
+  width: 100%; 
+ font-family:Courier New, Courier, monospace;
+
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 100%;
+text-transform: capitalize;
+  float:left;
+
+}
 }
