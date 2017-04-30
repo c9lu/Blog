@@ -1,4 +1,6 @@
+<div id="loader"></div>
 <div class="app">
+
 <p align="center" class="orangeText">Note you can filter the posts by clicking on the #tags in the bubbles or by clicking on the clouds below</p>
 <div align="center" style="width:100%; position:relative; display: inline-block ">
 <ul >
@@ -88,7 +90,7 @@
              
             <figure style="position:relative; margin-bottom:20px;">
               <a [routerLink]="['/Posts', post.id]">
-                <img class="blogimages" src="Images/{{post.image}}.jpg"  onerror="this.onerror=null;this.src='Images/3_c.jpg'" style="display:block; width:70%"/>
+                <img  src="Images/{{post.image}}.jpg"  onerror="this.onerror=null;this.src='Images/3_c.jpg'" style="display:block; width:70%"/>
                 <figcaption>
                     <span class ="caption" >   
                     <span style="color:white"> {{post.title}}</span>

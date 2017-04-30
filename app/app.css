@@ -48,45 +48,7 @@
    
 
 }
-.mobile{
 
-    float:left;
-}
-.caption {
-    color: white;
-    background:#ff3399; /* fallback */
-  
-    padding: .1em;
-    padding-left:0px;
-  text-decoration:none;  
- /*  padding: 0 5px;
-  */
-          float:left;
-    
-}
-.blogimages{
-
-    display:none;
-}
-.innerspan{
-     padding: 0 2px;
-      background: transparent;
-
-}
-
-figcaption {
-  position: absolute;
-  bottom: 10%;
-  width: 100%; 
- font-family:Courier New, Courier, monospace;
-
-  font-size: 0.5rem;
-  font-weight: bold;
-  line-height: 100%;
-text-transform: capitalize;
-  float:left;
-
-}
 
 
 }

@@ -113,16 +113,13 @@ color:orange; font-family:segoe print; display:block
   
     padding: .2em;
     padding-left:0px;
-  text-decoration:none;  
+    text-decoration:none;  
  /*  padding: 0 5px;
   */
-          float:left;
+    float:left;
     
 }
-.blogimages{
 
-    display:none;
-}
 .innerspan{
      padding: 0 4px;
       background: transparent;
