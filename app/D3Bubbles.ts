@@ -1,6 +1,7 @@
 
 var d3 = require("d3");
 
+
 export class D3Bubbles{
 
     public chart:this;
@@ -8,9 +9,26 @@ export class D3Bubbles{
     Height :number;
     SVGContainer;
     node;
-
+   // gradientDictionary={};
+   
     constructor (){}
     
+
+    gradientTheColor(colorcode:string)
+    {
+        var gradientColor = this.SVGContainer.append("defs")
+        .append("radialGradient")
+        .attr("id", "radial-gradient" + colorcode);
+
+        gradientColor.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#FBEFFB");
+
+        gradientColor.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", colorcode);
+
+    }
     
     public Chart (div, dataset, isEven){
         
@@ -55,15 +73,34 @@ export class D3Bubbles{
           
                 return "translate(" + d.x + "," + d.y + ")";
             });;
-      
-     this.node.append("circle")
+      let me = this;
+    
+    var circle = this.node.append("circle")
                 .attr("r", function (d) { return d.r*1.1; })
-                   .style("fill", function(d) { return d.data.color; })
+                   .style("fill", function(d) { 
+                       me.gradientTheColor(d.data.color)
+                       return "url(#radial-gradient"+d.data.color+")"; })
                    .style("opacity", function(d){return 1})
-                  
-              
                    ;
-   this.node= this.node.append("text").
+     
+     circle.on("mousedown", function(d){
+           // alert(d.r);
+        
+          d3.select(this).attr("r",function(d){
+             return d.r*1.5
+            }
+            );
+      });
+
+      circle.on("mouseup", function(d){
+
+        d3.select(this).attr("r", function(d){
+            return d.r
+        })
+
+      })
+                  
+    this.node.append("text").
             attr("cx", function(d){ 
                return d.x; 
             
@@ -79,6 +116,7 @@ export class D3Bubbles{
             .attr("font-size",function(d){return d.r/2.3+"px";})
             .attr("font-family","'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
 
+     
         
        d3.selectAll("g.nodeE").transition().duration(1500)
         .attr("transform", function(d) {

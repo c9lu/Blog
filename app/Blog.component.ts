@@ -34,6 +34,7 @@ export class BlogComponent implements OnInit
   name = 'guest'; 
   title = 'this is my blog';
  
+  selectedTag = "";
  blog: Blog={
     subtitle: "Hello guest, what am I up to?",
   
@@ -55,12 +56,12 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
 
     
       var tag = $(this).attr('id');
-     
+       me.selectedTag = tag;
       me.router.navigate(['/Tags', tag]);
-
+    
 
     })
-   },1000);
+   },800);
  }
 
   ngOnInit(){ 
@@ -80,6 +81,8 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
        {
           var result = me.blogService.GetPostsFromTagName(id);
           
+          me.selectedTag = id;
+          $("#tagDiv").show();
           if(typeof result!='undefined' && result!=null){
             result.subscribe(val=> { 
           

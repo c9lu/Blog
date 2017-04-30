@@ -39,11 +39,11 @@ text{
 }
 .columnList{
     
- 
+ /*
     -webkit-columns: 400px;
     -moz-columns: 1 400px;
     columns: 1 400px; 
-    
+   */ 
 }           
 .blocks{
     display:block;
@@ -91,4 +91,13 @@ figcaption {
   line-height: 150%;
 text-transform: capitalize;
 
+}
+.orangeText{
+
+color:orange; font-family:segoe print; display:block
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 500px) {
+ .orangeText{display:none}
 }

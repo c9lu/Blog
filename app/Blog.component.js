@@ -30,6 +30,7 @@ var BlogComponent = (function () {
         this.bubbleCreator = bubbleCreator;
         this.name = 'guest';
         this.title = 'this is my blog';
+        this.selectedTag = "";
         this.blog = {
             subtitle: "Hello guest, what am I up to?",
             Posts: []
@@ -40,9 +41,10 @@ var BlogComponent = (function () {
         setTimeout(function () {
             $(".bubbles").click(function (e) {
                 var tag = $(this).attr('id');
+                me.selectedTag = tag;
                 me.router.navigate(['/Tags', tag]);
             });
-        }, 1000);
+        }, 800);
     };
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
@@ -53,6 +55,8 @@ var BlogComponent = (function () {
             $(".column-right").css("z-index", 0);
             if (me.router.url.indexOf('Tags') > 0) {
                 var result = me.blogService.GetPostsFromTagName(id);
+                me.selectedTag = id;
+                $("#tagDiv").show();
                 if (typeof result != 'undefined' && result != null) {
                     result.subscribe(function (val) {
                         me.blog.Posts = val;

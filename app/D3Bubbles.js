@@ -1,8 +1,20 @@
 "use strict";
 var d3 = require("d3");
 var D3Bubbles = (function () {
+    // gradientDictionary={};
     function D3Bubbles() {
     }
+    D3Bubbles.prototype.gradientTheColor = function (colorcode) {
+        var gradientColor = this.SVGContainer.append("defs")
+            .append("radialGradient")
+            .attr("id", "radial-gradient" + colorcode);
+        gradientColor.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#FBEFFB");
+        gradientColor.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", colorcode);
+    };
     D3Bubbles.prototype.Chart = function (div, dataset, isEven) {
         var bubble = d3.pack(dataset).size([this.Width, this.Height]).padding(280);
         this.SVGContainer = d3.select(div).append('svg')
@@ -30,11 +42,26 @@ var D3Bubbles = (function () {
             return "translate(" + d.x + "," + d.y + ")";
         });
         ;
-        this.node.append("circle")
+        var me = this;
+        var circle = this.node.append("circle")
             .attr("r", function (d) { return d.r * 1.1; })
-            .style("fill", function (d) { return d.data.color; })
+            .style("fill", function (d) {
+            me.gradientTheColor(d.data.color);
+            return "url(#radial-gradient" + d.data.color + ")";
+        })
             .style("opacity", function (d) { return 1; });
-        this.node = this.node.append("text").
+        circle.on("mousedown", function (d) {
+            // alert(d.r);
+            d3.select(this).attr("r", function (d) {
+                return d.r * 1.5;
+            });
+        });
+        circle.on("mouseup", function (d) {
+            d3.select(this).attr("r", function (d) {
+                return d.r;
+            });
+        });
+        this.node.append("text").
             attr("cx", function (d) {
             return d.x;
         })
