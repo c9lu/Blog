@@ -21,18 +21,14 @@
      position:fixed;
      
 }
-.orangeText{
 
-color:orange; font-family:segoe print; display:block
-
-}
 @media screen and (min-width: 0px) and (max-width: 500px) {
 
  
   .column-left{position:relative; width:0;display:none}
   .column-right{position:relative;width:0;display:none}
   .container{width:0; display:none}
-  .orangeText{display:none}
+ 
   .column-center
 
 { 
@@ -49,6 +45,7 @@ color:orange; font-family:segoe print; display:block
 }
 .app{
     float:left;
+   
 
 }
 .mobile{

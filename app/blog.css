@@ -11,6 +11,11 @@ li {display:inline-block; text-decoration:none;  }
         
 
     }  
+
+    .app{
+
+    display:none;
+}
 .pagin li
 { 
    counter-increment: step-counter;

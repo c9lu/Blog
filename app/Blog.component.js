@@ -60,6 +60,8 @@ var BlogComponent = (function () {
                 if (typeof result != 'undefined' && result != null) {
                     result.subscribe(function (val) {
                         me.blog.Posts = val;
+                        $(".app").show();
+                        $("#loader").hide();
                     });
                 }
                 else {
@@ -67,11 +69,17 @@ var BlogComponent = (function () {
                 }
             }
             else if (id != null && id != "") {
-                me.blogService.getPostsByCategory(id).subscribe(function (val) { me.blog.Posts = val; });
+                me.blogService.getPostsByCategory(id).subscribe(function (val) {
+                    me.blog.Posts = val;
+                    $(".app").show();
+                    $("#loader").hide();
+                });
             }
             else {
                 me.blogService.getAllPosts().subscribe(function (val) {
                     me.blog.Posts = val;
+                    $(".app").show();
+                    $("#loader").hide();
                 });
             }
         });

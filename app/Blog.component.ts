@@ -62,6 +62,8 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
 
     })
    },800);
+
+ 
  }
 
   ngOnInit(){ 
@@ -86,7 +88,11 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
           if(typeof result!='undefined' && result!=null){
             result.subscribe(val=> { 
           
-                me.blog.Posts = val  })
+                me.blog.Posts = val ;
+               $(".app").show();
+               $("#loader").hide();
+            
+           })
 
           }
           else{
@@ -96,11 +102,19 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
         else if( id!= null && id!=""){
         
       
-          me.blogService.getPostsByCategory(id).subscribe(val=> { me.blog.Posts = val} );
+          me.blogService.getPostsByCategory(id).subscribe(val=> { 
+            me.blog.Posts = val;
+            $(".app").show();
+            $("#loader").hide();
+        
+      } );
         }
         else {
           
-           me.blogService.getAllPosts().subscribe(val=> { me.blog.Posts = val
+           me.blogService.getAllPosts().subscribe(val=> { 
+               me.blog.Posts = val;
+               $(".app").show();
+               $("#loader").hide();
               
             
           });
