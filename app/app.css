@@ -21,6 +21,82 @@
      position:fixed;
      
 }
+.orangeText{
+
+color:orange; font-family:segoe print; display:block
+
+}
+@media screen and (min-width: 0px) and (max-width: 500px) {
+
+ 
+  .column-left{position:relative; width:0;display:none}
+  .column-right{position:relative;width:0;display:none}
+  .container{width:0; display:none}
+  .orangeText{display:none}
+  .column-center
+
+{ 
+    
+    z-index:0; 
+    opacity:1;
+
+    background-color:black;
+  
+   width:100%;
+   float:left;
+
+
+}
+.app{
+    float:left;
+
+}
+.mobile{
+
+    float:left;
+}
+.caption {
+    color: white;
+    background:#ff3399; /* fallback */
+  
+    padding: .1em;
+    padding-left:0px;
+  text-decoration:none;  
+ /*  padding: 0 5px;
+  */
+          float:left;
+    
+}
+.blogimages{
+
+    display:none;
+}
+.innerspan{
+     padding: 0 2px;
+      background: transparent;
+
+}
+
+figcaption {
+  position: absolute;
+  bottom: 10%;
+  width: 100%; 
+ font-family:Courier New, Courier, monospace;
+
+  font-size: 0.5rem;
+  font-weight: bold;
+  line-height: 100%;
+text-transform: capitalize;
+  float:left;
+
+}
+
+
+}
+
+
+
+
 
 .container
 {
