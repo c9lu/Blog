@@ -100,7 +100,12 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
           }
        }
         else if( id!= null && id!=""){
-        
+         $("#artDiv").hide();
+         if(id=="art"){
+              $("#artDiv").show();
+
+          }
+         
       
           me.blogService.getPostsByCategory(id).subscribe(val=> { 
             me.blog.Posts = val;

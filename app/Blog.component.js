@@ -69,6 +69,10 @@ var BlogComponent = (function () {
                 }
             }
             else if (id != null && id != "") {
+                $("#artDiv").hide();
+                if (id == "art") {
+                    $("#artDiv").show();
+                }
                 me.blogService.getPostsByCategory(id).subscribe(function (val) {
                     me.blog.Posts = val;
                     $(".app").show();
