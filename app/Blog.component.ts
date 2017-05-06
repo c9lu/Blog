@@ -61,7 +61,7 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
     
 
     })
-   },800);
+   },1500);
 
  
  }
@@ -100,6 +100,7 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
           }
        }
         else if( id!= null && id!=""){
+         
          $("#artDiv").hide();
          if(id=="art"){
               $("#artDiv").show();

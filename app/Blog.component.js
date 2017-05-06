@@ -44,7 +44,7 @@ var BlogComponent = (function () {
                 me.selectedTag = tag;
                 me.router.navigate(['/Tags', tag]);
             });
-        }, 800);
+        }, 1500);
     };
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
