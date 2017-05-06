@@ -15,13 +15,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 require('rxjs/add/operator/map');
+var router_1 = require('@angular/router');
 var d3 = require("d3");
 var d3Result;
 var Blog_service_1 = require('./Blog.service'); //import is from ES6.
 var D3Bubbles_1 = require('./D3Bubbles');
 var CreateBubbles = (function () {
-    function CreateBubbles(blogService) {
+    function CreateBubbles(blogService, router) {
         this.blogService = blogService;
+        this.router = router;
         this.Data = { children: [] };
         this.isEven = false;
     }
@@ -59,14 +61,15 @@ var CreateBubbles = (function () {
     };
     CreateBubbles.prototype.ngAfterViewInit = function () {
         var _this = this;
+        var me = this;
         d3Result = this.blogService.getAllPostsTags_Frequency();
         if (d3Result != null) {
             d3Result.subscribe(function (val) {
                 _this.Data = _this.getD3Data(val);
                 if (_this.isEven == true)
-                    new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
                 else
-                    new D3Bubbles_1.D3Bubbles().SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
             });
         }
     };
@@ -80,16 +83,17 @@ var CreateBubbles = (function () {
             template: "<div #container></div>",
             selector: 'bubble-panes'
         }), 
-        __metadata('design:paramtypes', [Blog_service_1.BlogService])
+        __metadata('design:paramtypes', [Blog_service_1.BlogService, router_1.Router])
     ], CreateBubbles);
     return CreateBubbles;
 }());
 exports.CreateBubbles = CreateBubbles;
 var rightBubbles = (function (_super) {
     __extends(rightBubbles, _super);
-    function rightBubbles(blogService2) {
-        _super.call(this, blogService2);
+    function rightBubbles(blogService2, router2) {
+        _super.call(this, blogService2, router2);
         this.blogService2 = blogService2;
+        this.router2 = router2;
         this.isEven = false;
     }
     rightBubbles = __decorate([
@@ -98,16 +102,17 @@ var rightBubbles = (function (_super) {
             template: "<div #container></div>",
             selector: 'bubble-panes-right',
         }), 
-        __metadata('design:paramtypes', [Blog_service_1.BlogService])
+        __metadata('design:paramtypes', [Blog_service_1.BlogService, router_1.Router])
     ], rightBubbles);
     return rightBubbles;
 }(CreateBubbles));
 exports.rightBubbles = rightBubbles;
 var leftBubbles = (function (_super) {
     __extends(leftBubbles, _super);
-    function leftBubbles(blogService3) {
-        _super.call(this, blogService3);
+    function leftBubbles(blogService3, router3) {
+        _super.call(this, blogService3, router3);
         this.blogService3 = blogService3;
+        this.router3 = router3;
         this.isEven = true;
     }
     leftBubbles = __decorate([
@@ -116,7 +121,7 @@ var leftBubbles = (function (_super) {
             template: "<div #container></div>",
             selector: 'bubble-panes-left'
         }), 
-        __metadata('design:paramtypes', [Blog_service_1.BlogService])
+        __metadata('design:paramtypes', [Blog_service_1.BlogService, router_1.Router])
     ], leftBubbles);
     return leftBubbles;
 }(CreateBubbles));

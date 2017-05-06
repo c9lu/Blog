@@ -3,6 +3,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/map';
 
 
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 var d3 = require("d3");
 var d3Result;
@@ -23,7 +24,7 @@ export class CreateBubbles{
     Data={children:[]} ;
     public isEven :Boolean = false;
   
-    constructor (private blogService:BlogService){
+    constructor (private blogService:BlogService, private router:Router){
       
     }
     
@@ -75,16 +76,16 @@ export class CreateBubbles{
  
      }
      ngAfterViewInit(){
-    
+        let me= this;
           d3Result =  this.blogService.getAllPostsTags_Frequency()
           if(d3Result!=null){
           d3Result.subscribe(val=>{
 
               this.Data= this.getD3Data(val);
            if(this.isEven==true)
-                new D3Bubbles().SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+                new D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
             else
-                new D3Bubbles().SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+                new D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
     
                 
 
@@ -102,9 +103,9 @@ export class CreateBubbles{
 export class rightBubbles extends CreateBubbles{
           
           
-     constructor (private blogService2:BlogService){
+     constructor (private blogService2:BlogService,private router2:Router){
          
-          super(blogService2);
+          super(blogService2,  router2);
            this.isEven = false;
     }
 
@@ -117,8 +118,8 @@ export class rightBubbles extends CreateBubbles{
 
 })
 export class leftBubbles extends CreateBubbles{
- constructor (private blogService3:BlogService){
-          super(blogService3);
+ constructor (private blogService3:BlogService, private router3:Router){
+          super(blogService3, router3);
           this.isEven = true;
 
     }

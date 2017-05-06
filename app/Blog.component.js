@@ -36,16 +36,23 @@ var BlogComponent = (function () {
             Posts: []
         };
     }
-    BlogComponent.prototype.ngAfterViewInit = function () {
-        var me = this;
-        setTimeout(function () {
-            $(".bubbles").click(function (e) {
-                var tag = $(this).attr('id');
-                me.selectedTag = tag;
-                me.router.navigate(['/Tags', tag]);
-            });
-        }, 1500);
-    };
+    /* ngAfterViewInit(){
+       let me= this;
+      setTimeout(function(){
+        alert('bind click event');
+        $(".bubbles").click(function(e){
+    
+        
+          var tag = $(this).attr('id');
+           me.selectedTag = tag;
+          me.router.navigate(['/Tags', tag]);
+        
+    
+        })
+       },1500);
+    
+     
+     }*/
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
         var id = "";

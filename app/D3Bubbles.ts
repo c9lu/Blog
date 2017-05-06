@@ -1,4 +1,5 @@
 
+import {ActivatedRoute, Params, Router} from '@angular/router';
 var d3 = require("d3");
 
 
@@ -11,7 +12,7 @@ export class D3Bubbles{
     node;
    // gradientDictionary={};
    
-    constructor (){}
+    constructor ( private router:Router ){}
     
 
     gradientTheColor(colorcode:string)
@@ -100,7 +101,7 @@ export class D3Bubbles{
 
       })
                   
-    this.node.append("text").
+    var text= this.node.append("text").
             attr("cx", function(d){ 
                return d.x; 
             
@@ -116,7 +117,10 @@ export class D3Bubbles{
             .attr("font-size",function(d){return d.r/2.3+"px";})
             .attr("font-family","'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
 
-     
+      text.on("mousedown", function(d){
+            var tag = d.data.name.substring(1);
+             me.router.navigate(['/Tags', tag]);
+      })
         
        d3.selectAll("g.nodeE").transition().duration(1500)
         .attr("transform", function(d) {

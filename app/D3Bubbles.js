@@ -2,7 +2,8 @@
 var d3 = require("d3");
 var D3Bubbles = (function () {
     // gradientDictionary={};
-    function D3Bubbles() {
+    function D3Bubbles(router) {
+        this.router = router;
     }
     D3Bubbles.prototype.gradientTheColor = function (colorcode) {
         var gradientColor = this.SVGContainer.append("defs")
@@ -61,7 +62,7 @@ var D3Bubbles = (function () {
                 return d.r;
             });
         });
-        this.node.append("text").
+        var text = this.node.append("text").
             attr("cx", function (d) {
             return d.x;
         })
@@ -76,6 +77,10 @@ var D3Bubbles = (function () {
             .text(function (d) { return d.data.name; })
             .attr("font-size", function (d) { return d.r / 2.3 + "px"; })
             .attr("font-family", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
+        text.on("mousedown", function (d) {
+            var tag = d.data.name.substring(1);
+            me.router.navigate(['/Tags', tag]);
+        });
         d3.selectAll("g.nodeE").transition().duration(1500)
             .attr("transform", function (d) {
             if (typeof d != 'undefined')

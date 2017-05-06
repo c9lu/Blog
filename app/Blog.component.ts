@@ -48,10 +48,10 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
 
  
 
- ngAfterViewInit(){
+/* ngAfterViewInit(){
    let me= this;
   setTimeout(function(){
- 
+    alert('bind click event');
     $(".bubbles").click(function(e){
 
     
@@ -64,7 +64,7 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
    },1500);
 
  
- }
+ }*/
 
   ngOnInit(){ 
     let me = this;
