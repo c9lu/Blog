@@ -67,7 +67,7 @@ var BlogComponent = (function () {
                 if (typeof result != 'undefined' && result != null) {
                     result.subscribe(function (val) {
                         me.blog.Posts = val;
-                        $(".app").show();
+                      
                         $("#loader").hide();
                     });
                 }
@@ -82,14 +82,14 @@ var BlogComponent = (function () {
                 }
                 me.blogService.getPostsByCategory(id).subscribe(function (val) {
                     me.blog.Posts = val;
-                    $(".app").show();
+                  
                     $("#loader").hide();
                 });
             }
             else {
                 me.blogService.getAllPosts().subscribe(function (val) {
                     me.blog.Posts = val;
-                    $(".app").show();
+                  
                     $("#loader").hide();
                 });
             }
