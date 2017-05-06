@@ -1,28 +1,10 @@
 ul {list-style-type:none} 
 li {display:inline-block; text-decoration:none;  } 
 .posts {clear:both} 
-.pagin {
-     
-      margin-top:10px;
-      
-     list-style-type: none;
-     
+
+
     
-        
 
-    }  
-
-    .app{
-
-    display:none;
-}
-.pagin li
-{ 
-   counter-increment: step-counter;
-    margin-bottom: 10px;
-     cursor: pointer; cursor: hand;
-     display:inline;
-}
 a{
     text-decoration: none;
    
@@ -97,6 +79,7 @@ color:orange; font-family:segoe print; display:block
 }
 
 @media screen and (min-width: 0px) and (max-width: 700px) {
+ 
  .orangeText{display:none}
 
  
