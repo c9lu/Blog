@@ -42,14 +42,7 @@ text{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
 }
-.columnList{
-    
- /*
-    -webkit-columns: 400px;
-    -moz-columns: 1 400px;
-    columns: 1 400px; 
-   */ 
-}           
+          
 .blocks{
     display:block;
 
@@ -103,7 +96,7 @@ color:orange; font-family:segoe print; display:block
 
 }
 
-@media screen and (min-width: 0px) and (max-width: 500px) {
+@media screen and (min-width: 0px) and (max-width: 600px) {
  .orangeText{display:none}
 
  
