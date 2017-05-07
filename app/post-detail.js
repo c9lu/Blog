@@ -26,12 +26,11 @@ var PostDetailComponent = (function () {
         var posts;
         me.route.params.subscribe(function (params) {
             id = params['id'];
-            $(".column-left").css("z-index", -1);
-            $(".column-right").css("z-index", -1);
             $.get('./_posts/post' + id + '.html', function (html_string) {
                 me.myTemplate = html_string;
             });
             if (id != null) {
+                $("#loader").hide();
                 me.blogService.getPostById(id).subscribe(function (p) {
                     me.post = p;
                 });
