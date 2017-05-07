@@ -6,8 +6,9 @@
     width:25%;
     background-color:black;
     left:0;
+   
     position:fixed;
-    
+    overflow-x:hidden;
     
 } 
 
