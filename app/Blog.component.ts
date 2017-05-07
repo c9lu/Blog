@@ -72,7 +72,7 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
     let id= "";
 
         
-     
+     $("#loader").show();
 
     me.activatedRoute.params.subscribe(params => {
         id = params["id"];
@@ -84,16 +84,14 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
           var result = me.blogService.GetPostsFromTagName(id);
           
           me.selectedTag = id;
-          $("#tagDiv").show();
+          
           if(typeof result!='undefined' && result!=null){
             result.subscribe(val=> { 
-          
-                me.blog.Posts = val ;
-               $(".app").show();
+              $("#tagDiv").show();
+                me.blog.Posts = val ;              
                $("#loader").hide();
             
            })
-
           }
           else{
              me.router.navigate(['']) 
@@ -101,25 +99,23 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
        }
         else if( id!= null && id!=""){
          
-         $("#artDiv").hide();
-         if(id=="art"){
+            $("#artDiv").hide();
+            if(id=="art")
+            {
               $("#artDiv").show();
 
-          }
-         
-      
-          me.blogService.getPostsByCategory(id).subscribe(val=> { 
-            me.blog.Posts = val;
-            $(".app").show();
-            $("#loader").hide();
+            }
+           me.blogService.getPostsByCategory(id).subscribe(val=> { 
+             me.blog.Posts = val;          
+             $("#loader").hide();
         
-      } );
+            } );
         }
         else {
           
            me.blogService.getAllPosts().subscribe(val=> { 
                me.blog.Posts = val;
-               $(".app").show();
+              
                $("#loader").hide();
               
             
