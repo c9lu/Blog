@@ -51,9 +51,7 @@ export class PostDetailComponent implements OnInit{
                   me.route.params.subscribe(params =>
                  {
                        id= params['id'];   
-                        
-                       $(".column-left").css("z-index", -1);
-                       $(".column-right").css("z-index", -1);
+                   
 
                         $.get('./_posts/post'+id+'.html', function(html_string){
                            me.myTemplate = html_string;
@@ -62,6 +60,7 @@ export class PostDetailComponent implements OnInit{
 
                         if (id!=null)
                         {
+                                $("#loader").hide();
                                me.blogService.getPostById(id).subscribe(p=>{
                                        me.post=p;
                                   
