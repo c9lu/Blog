@@ -56,6 +56,7 @@ var BlogComponent = (function () {
     BlogComponent.prototype.ngOnInit = function () {
         var me = this;
         var id = "";
+        $("#loader").show();
         me.activatedRoute.params.subscribe(function (params) {
             id = params["id"];
             $(".column-left").css("z-index", 0);
@@ -63,11 +64,10 @@ var BlogComponent = (function () {
             if (me.router.url.indexOf('Tags') > 0) {
                 var result = me.blogService.GetPostsFromTagName(id);
                 me.selectedTag = id;
-                $("#tagDiv").show();
                 if (typeof result != 'undefined' && result != null) {
                     result.subscribe(function (val) {
+                        $("#tagDiv").show();
                         me.blog.Posts = val;
-                      
                         $("#loader").hide();
                     });
                 }
@@ -82,14 +82,12 @@ var BlogComponent = (function () {
                 }
                 me.blogService.getPostsByCategory(id).subscribe(function (val) {
                     me.blog.Posts = val;
-                  
                     $("#loader").hide();
                 });
             }
             else {
                 me.blogService.getAllPosts().subscribe(function (val) {
                     me.blog.Posts = val;
-                  
                     $("#loader").hide();
                 });
             }
