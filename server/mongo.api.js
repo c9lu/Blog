@@ -63,8 +63,44 @@ exports.getPostsByCategory = function(_category){
             }
     }
     );
+}
+exports.getUser_callback=function(_name, callbackfunc){
+     
+   return dbConnect().then(
+        function(db){
+        
+          console.log("_name is ?????"+_name);
+          db.collection('users').findOne({
+              user:_name
+          },
+         function(err, result){
+             console.log("hiiii" + result);
+            callbackfunc(result);
+        
+       
+        }
+
+    );
+
+});
+}
+
+exports.getUser=function(_name){
+   return dbConnect().then(
+        function(db){
+         
+          return db.collection('users').findOne({
+              user:_name
+          }
+         
+         );
+          
+        }
+
+    );
 
 }
+
 exports.getPostsByIds = function(postsStr){
     console.log(postsStr);
     var postids = []; 
@@ -98,6 +134,18 @@ exports.getPostById = function(_id){
         
     );
 }
+
+exports.saveUser = function(user){
+    dbConnect().then(
+
+        function(db){
+
+            db.collection('users').save({"user":user.user, "email":user.email, "subscribe":user.subscribe});
+        }
+   );
+
+}
+
 console.log(this.getPostsByIds("1_2_3"));
 
   
