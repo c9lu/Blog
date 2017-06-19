@@ -1,6 +1,8 @@
 <div class="app">
 
 <p align="center" class="orangeText">Note you can filter the posts by clicking on the #tags in the bubbles or by clicking on the clouds below</p>
+
+
 <div align="center" style="width:100%; position:relative; display: inline-block ">
 <ul >
  <li>
@@ -77,22 +79,22 @@
   </ul>
   </div>
  
-
-
-<div align="center" style="clear:both">
+<div class="blocks" align="center">
 
    <div id="tagDiv" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif"><span>
       Tag:  {{selectedTag}}, # of posts: {{blog.Posts.length}}
      </span></div>
 
      <div id="artDiv" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif">work in progress :)</div>
-    <ul class="columnList">
-        <li  *ngFor="let post of blog.Posts; let i=index " class="blocks"> 
-             
-            <figure style="position:relative; margin-bottom:20px;">
+    
+    
+    <ul  style="margin: 0px auto;list-style: none; padding:0px;">
+        <li  *ngFor="let post of blog.Posts; let i=index "> 
+      
+            <figure style="position:relative; float:left; margin-bottom:20px;">
               <a [routerLink]="['/Posts', post.id]">
                 <img  src="Images/{{post.image}}.jpg"  onerror="this.onerror=null;this.src='Images/3_c.jpg'" style="display:block; width:70%"/>
-                <figcaption>
+                <figcaption style="float:left;">
                     <span class ="caption" >   
                     <span style="color:white"> {{post.title}}</span>
               
@@ -100,7 +102,8 @@
                       <span class="innerspan"></span></span>
                 
                 </figcaption>
-                  </a> 
+                 
+             </a> 
             </figure>
           
               
