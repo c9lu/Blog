@@ -23,7 +23,7 @@
      
 }
 
-@media screen and (min-width: 0px) and (max-width: 500px) {
+@media screen and (min-width: 0px) and (max-width: 800px) {
 
  
 
@@ -39,9 +39,6 @@
     min-width:250px;
   
   
-  
-  margin-right:40%;
-
 
 }
 
