@@ -19,12 +19,49 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
         transition('hidden => shown', animate('1000ms'))                           
     ])
     ],*/
-    template:`<div style="padding-left:10px; padding-right:10px;">
+    template:`<div class="column-center post">
     <p style="font-size:22px; color:white;font-family:Calibri">{{post?.title}}</p>
     <p style="font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
     <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px"></div></div>`,
- 
+    styles:[
+            `@media screen and (min-width: 0px) and (max-width: 700px) {
+                .post
+                {
+                        margin-left:-60px;
+                       
+                        padding-left:0px;
+                        width:150%;
+                }
+
+                .entry-content img{
+                        width:50%
+                }
+             
+        }
+   
+         @media screen and (min-width: 701px) {
+        .post
+        { 
     
+        z-index:0; 
+        opacity:1;
+       
+        background-color:black;
+       
+        padding-left:6px;
+        padding-right:6px
+  
+
+        }
+        }
+
+    
+
+
+
+    `
+
+    ],
     providers:[BlogService]
     
         
