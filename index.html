@@ -4,9 +4,9 @@
     <base href="/">
     <title>my blog</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit-no">
     <link rel="stylesheet" href="../styles.css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <!-- Polyfill(s) for older browsers -->
     <script src="../node_modules/core-js/client/shim.min.js"></script>
@@ -93,12 +93,48 @@ a:hover{color: #ff3399}
   display: none;
   text-align: center;
 }
+
+#blog_title{
+
+    color:#ff3399;
+    font-family:segoe print; 
+    text-align: center; 
+    font-size:33px; 
+    font-weight: "bolder";
+    
+}
+footer{
+
+  background-color: black; padding-top:10px;padding-bottom:20px
+}
+@media screen and (min-width: 0px) and (max-width: 700px) {
+
+ #blog_title{
+
+    color:#ff3399;
+    font-family:segoe print; 
+    text-align: center; 
+    font-size:28px; 
+    font-weight: bolder;
+    min-width:80%;
+    max-width:80%;
+    padding-right:15px
+
+}
+footer{
+
+  min-width:90%;
+  max-width:90%;
+  background-color: black; padding-top:5px;padding-bottom:69px
+}
+}
+
     </style>
   
   </head>
   <header>
    <center>
-     <a href="" style="color:#ff3399; font-family:segoe print; text-align: center; font-size:33px; font-weight: bolder">Hello guest, what am I up to?</a>
+    <div id="blog_title"> <a href=""  >Hello guest, what am I up to?</a></div>
    </center>
   </header>
   <body style="background-color: black;">
@@ -115,5 +151,5 @@ a:hover{color: #ff3399}
     
   </body>
   <br/>
-  <footer style="background-color: black; padding-top:10px;">This site is developed using <span style="color:hotpink">Angular 2</span>, mongodb, express framework and <span style="color:coral">D3.js</span>, github:<a href="https://github.com/c9lu/blog" target="_blank"> https://github.com/c9lu/blog</a></footer>
+<footer>This site is developed using <span style="color:hotpink">Angular 2</span>, mongodb, express framework and <span style="color:coral">D3.js</span>, github:<a href="https://github.com/c9lu/blog" target="_blank"> https://github.com/c9lu/blog</a></footer>
 </html>
