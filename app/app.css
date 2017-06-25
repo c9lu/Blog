@@ -23,30 +23,13 @@
      
 }
 
-@media screen and (min-width: 0px) and (max-width: 800px) {
+@media screen and (min-width: 0px) and (max-width: 700px) {
 
+
+
+  .sidecontainer{width:0; display:none}
  
-
-  .container{width:0; display:none}
  
- .column-center
-
-{ 
-    
-    z-index:0; 
-    opacity:1;
-    
-    min-width:250px;
-  
-  
-
-}
-
-
-
-}
-
-
 
 
 
@@ -69,7 +52,8 @@
     margin-left:25%;
     background-color:black;
     margin-right:25%;
-   
+    width: 50%;
 
 }
 
+}

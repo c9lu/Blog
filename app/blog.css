@@ -3,8 +3,6 @@ li {display:inline-block; text-decoration:none;  }
 .posts {clear:both} 
 
 
-    
-
 a{
     text-decoration: none;
    
@@ -20,7 +18,7 @@ text{
     align-items: left;
 
     clear:both;
-   min-width: 220px;
+   min-width: 300px;
    margin: auto;
 
 }
@@ -40,7 +38,7 @@ color:yellowgreen;
     color: white;
     background:#ff3399; /* fallback */
   
-      padding-left:15px;
+      padding:10px;
   text-decoration:none;  
 
         
@@ -70,41 +68,65 @@ text-transform: capitalize;
 color:orange; font-family:segoe print; display:block
 
 }
+.post_images{
 
+    width:50%; 
+}
+figure{
+
+    position:relative; margin-bottom:20px;
+  
+}
 @media screen and (min-width: 0px) and (max-width: 700px) {
  
  .orangeText{display:none}
+.post_images{
 
- 
+    width:150%; height:150%;
+    margin-left:-40px;
+}
+#art-cloud{
+    display:none;
+
+ }
+
+figure{
+
+    position:relative; margin-bottom:20px;
+    margin-left:-40px;
+    margin-right:30px;
+}
+
 .caption {
     color: white;
-    background:#ff3399; /* fallback */
+    background:#ff3399; 
   
   
     padding-left:0px;
     text-decoration:none;  
- 
-    float:left;
-    padding: 0 5px;
+
+    padding: 0px;
 }
 
 .innerspan{
-     padding: 0 4px;
+     padding: 0, 1px;
       background: transparent;
-
+      min-width:140%
 }
 
 figcaption {
   position: absolute;
   bottom: 10%;
-  width: 100%; 
+  width: 140%; 
  font-family:Courier New, Courier, monospace;
 
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   line-height: 100%;
 text-transform: capitalize;
-  float:left;
+  
+
+ 
 
 }
 }
