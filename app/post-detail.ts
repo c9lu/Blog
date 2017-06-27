@@ -24,13 +24,16 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
     <p style="font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
     <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px"></div></div>`,
     styles:[
-            `@media screen and (min-width: 0px) and (max-width: 700px) {
+            `
+            @media screen and (min-width: 0px) and (max-width: 600px) {
                 .post
                 {
-                        margin-left:-60px;
+                        margin-left:-70px;
                        
                         padding-left:0px;
-                        width:150%;
+                        width:200%;
+                        
+                        
                 }
 
                 .entry-content img{
@@ -39,7 +42,7 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
              
         }
    
-         @media screen and (min-width: 701px) {
+         @media screen and (min-width: 601px) {
         .post
         { 
     
@@ -50,7 +53,7 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
        
         padding-left:6px;
         padding-right:6px
-  
+        max-width:50%;
 
         }
         }
