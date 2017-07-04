@@ -77,7 +77,7 @@ figure{
     position:relative; margin-bottom:20px;
   
 }
-@media screen and (min-width: 0px) and (max-width: 600px) {
+@media screen and (min-width: 0px) and (max-width: 800px) {
  
  .orangeText{display:none}
 .post_images{
