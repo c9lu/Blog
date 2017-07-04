@@ -76,8 +76,8 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
 
     me.activatedRoute.params.subscribe(params => {
         id = params["id"];
-        $(".column-left").css("z-index", 0);
-        $(".column-right").css("z-index", 0);
+       // $(".column-left").css("z-index", 0);
+      //  $(".column-right").css("z-index", 0);
          
         if(me.router.url.indexOf('Tags')>0)
        {
