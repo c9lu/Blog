@@ -59,8 +59,8 @@ var BlogComponent = (function () {
         $("#loader").show();
         me.activatedRoute.params.subscribe(function (params) {
             id = params["id"];
-            $(".column-left").css("z-index", 0);
-            $(".column-right").css("z-index", 0);
+            // $(".column-left").css("z-index", 0);
+            //  $(".column-right").css("z-index", 0);
             if (me.router.url.indexOf('Tags') > 0) {
                 var result = me.blogService.GetPostsFromTagName(id);
                 me.selectedTag = id;
