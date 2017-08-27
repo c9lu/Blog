@@ -28,6 +28,7 @@
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
       'mongodb':'npm:mongodb',
       'express':'npm:express',
+       'ng2-simple-page-scroll/ng2-simple-page-scroll': 'npm:ng2-simple-page-scroll/bundles/ng2-simple-page-scroll.umd.js',
    //   'services' : '/services', 
       // 'mongodb':''
       // other libraries

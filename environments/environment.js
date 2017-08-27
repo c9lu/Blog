@@ -5,6 +5,6 @@
 var environment = {
     production: false,
     connectionString: 'mongodb://127.0.0.1:27017/blog',
-    webApiURL: 'http://blogserviceapi.azurewebsites.net'
+    webApiURL: 'http://localhost:5000'
 };
 //# sourceMappingURL=environment.js.map
