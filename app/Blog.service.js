@@ -13,14 +13,18 @@ var post_1 = require("./post");
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/of');
-var frequencyMap;
+var comment_1 = require("./comment");
+var app_functions_1 = require("./app.functions");
 var BlogService = (function () {
     function BlogService(http) {
         this.http = http;
         this.apiURL = environment.webApiURL;
+        this.frequencyMap = {};
     }
     BlogService.prototype.buildPostObjectFromJson = function (jsonString) {
-        return new post_1.Post(Number(jsonString.id), jsonString.title, jsonString.image, jsonString.html, jsonString.createdate);
+        var post = new post_1.Post(Number(jsonString.id), jsonString.title, jsonString.image, jsonString.html, jsonString.createdate);
+        post.comments = jsonString.postcomments;
+        return post;
     };
     BlogService.prototype.buildPostObjectsFromJson = function (jsonArray) {
         var results = [];
@@ -30,29 +34,42 @@ var BlogService = (function () {
         }
         return results;
     };
+    /* private retrievePostComments(jsonArray:any):any{
+         let frequencyMap = {};
+        
+             
+          //  if(element.postcomments.length!=null && element.postcomments.length>0){
+        frequencyMap = jsonArray.map((element)=>{
+                 return   getFreqObj(frequencyMap, element, "title", element.postcomments!=null? element.postcomments.length:0);
+                     
+
+                });
+       
+         
+
+     }*/
+    BlogService.prototype.savePostComments = function (comment) {
+        var result = this.http.post(this.apiURL + '/savecomment', comment);
+        return result;
+    };
     BlogService.prototype.retrieveTagsFrequencyFromPosts = function (jsonArray) {
-        frequencyMap = {}; //{};
         var index = 0;
-        for (var _i = 0, jsonArray_2 = jsonArray; _i < jsonArray_2.length; _i++) {
-            var element = jsonArray_2[_i];
-            index = index + 1;
-            var obj = {};
-            for (var _a = 0, _b = element.tags; _a < _b.length; _a++) {
-                var t = _b[_a];
-                if (t.indexOf(' ') > 0) {
-                    t = t.replace(' ', '_');
+        var self = this;
+        if (JSON.stringify(self.frequencyMap) == '{}') {
+            //      this.frequencyMap={};
+            jsonArray.forEach(function (post) {
+                post.tags.forEach(function (tag) {
+                    tag = tag.replace(' ', '_');
+                    self.frequencyMap = app_functions_1.getFreqObj(self.frequencyMap, post, tag, 1, 0);
+                });
+                if (typeof (post.postcomments) != 'undefined' && post.postcomments != null) {
+                    post.postcomments.forEach(function (comment) {
+                        self.frequencyMap = app_functions_1.getFreqObj(self.frequencyMap, post, post.title, 1, 1);
+                    });
                 }
-                if (frequencyMap[t] == null) {
-                    frequencyMap[t] = { count: 1, PostIDs: [] };
-                    frequencyMap[t].PostIDs.push(element.id);
-                }
-                else {
-                    frequencyMap[t].count = frequencyMap[t].count + 1;
-                    frequencyMap[t].PostIDs.push(element.id);
-                }
-            }
+            });
         }
-        return frequencyMap;
+        return self.frequencyMap;
     };
     BlogService.prototype.getPostById = function (id) {
         var _this = this;
@@ -63,11 +80,11 @@ var BlogService = (function () {
     BlogService.prototype.GetPostsFromTagName = function (tagName) {
         var _this = this;
         var postIDs = [];
-        if (frequencyMap == null || frequencyMap[tagName] == null) {
+        if (this.frequencyMap == null || this.frequencyMap[tagName] == null) {
             return null;
         }
         else {
-            postIDs = frequencyMap[tagName].PostIDs.join("_");
+            postIDs = this.frequencyMap[tagName].PostIDs.join("_");
         }
         return this.http.get(this.apiURL + '/MPosts/' + postIDs).map(function (response) {
             return _this.buildPostObjectsFromJson(response.json());
@@ -82,7 +99,8 @@ var BlogService = (function () {
     BlogService.prototype.getAllPostsTags_Frequency = function () {
         var _this = this;
         return this.http.get(this.apiURL + '/').map(function (response) {
-            return _this.retrieveTagsFrequencyFromPosts(response.json());
+            _this.frequencyMap = _this.retrieveTagsFrequencyFromPosts(response.json());
+            return _this.frequencyMap;
         });
     };
     BlogService.prototype.getAllPosts = function () {
@@ -90,6 +108,28 @@ var BlogService = (function () {
         return this.http.get(this.apiURL + '/').map(function (response) {
             return _this.buildPostObjectsFromJson(response.json());
         });
+    };
+    BlogService.prototype.getPostComments = function (postID) {
+        var _this = this;
+        return this.http.get(this.apiURL + '/Comments/' + postID).map(function (response) {
+            return _this.buildCommentObjects(response.json());
+        });
+    };
+    BlogService.prototype.buildCommentObjects = function (jsonObject) {
+        var comments = new Array();
+        for (var _i = 0, _a = jsonObject[0].postcomments; _i < _a.length; _i++) {
+            var pc = _a[_i];
+            if (pc.author == null || pc.author == "") {
+                pc.author = "Anonymous";
+            }
+            var c = new comment_1.comment(Number(pc.postid), pc.content, pc.author, pc.id);
+            comments.push(c);
+        }
+        return comments;
+    };
+    BlogService.prototype.deleteComment = function (_postid, _commentid) {
+        var comment = { postid: _postid, commentid: _commentid };
+        return this.http.post(this.apiURL + '/deletecomment', comment);
     };
     BlogService = __decorate([
         core_1.Injectable(), 

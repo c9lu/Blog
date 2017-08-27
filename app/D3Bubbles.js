@@ -1,6 +1,8 @@
 "use strict";
 var d3 = require("d3");
+var node;
 var D3Bubbles = (function () {
+    //  node;
     // gradientDictionary={};
     function D3Bubbles(router) {
         this.router = router;
@@ -16,86 +18,128 @@ var D3Bubbles = (function () {
             .attr("offset", "100%")
             .attr("stop-color", colorcode);
     };
+    D3Bubbles.prototype.decorateCommentBubbles = function () {
+        var commentgroup = d3.selectAll(".comment").append("g");
+        commentgroup.append("svg:image")
+            .attr("width", function (d) {
+            return d.r * 2;
+        })
+            .attr("height", function (d) { return d.r * 1.5; })
+            .attr("xlink:href", "Images/purplecomment.png")
+            .attr("x", function (d) {
+            return -(d.r);
+        }).attr("y", function () {
+            return -25;
+        })
+            .style("opacity", function (d) { return 0.65; })
+            .style("cursor", "pointer");
+        commentgroup.append("text").text(function (d) {
+            if (d.data.rfreq > 2)
+                return d.data.rfreq;
+            else
+                return "";
+        }).attr("font-size", function (d) { return d.data.rfreq * 5; })
+            .attr("y", function (d) { return -22; })
+            .style("cursor", "pointer");
+    };
     D3Bubbles.prototype.Chart = function (div, dataset, isEven) {
-        var bubble = d3.pack(dataset).size([this.Width, this.Height]).padding(280);
+        var bubble = d3.pack(dataset).size([this.Width, this.Height]).padding(100);
         this.SVGContainer = d3.select(div).append('svg')
             .attr('width', this.Width)
             .attr('height', this.Height)
             .attr("class", "bubble");
         //https://jsfiddle.net/r24e8xd7/9/
         //to append a circle to each data.
+        ///to append image https://stackoverflow.com/questions/14567809/how-to-add-an-image-to-an-svg-container-using-d3-js
         var nodes = d3.hierarchy(dataset).sum(function (d) { return d.frequency; });
-        this.node = this.SVGContainer.selectAll("node").data(bubble(nodes).descendants())
+        var _class = "";
+        node = this.SVGContainer.selectAll("node").data(bubble(nodes).descendants())
             .enter()
             .filter(function (d) {
             return !d.children;
         })
-            .append('g').attr("class", function () {
+            .append('g').attr("class", function (d) {
             if (isEven == false) {
-                return "nodeO";
+                _class = "nodeO";
             }
             else {
-                return "nodeE";
+                _class = "nodeE";
+            }
+            if (d.data.IsComment == 0) {
+                return _class + " circle";
+            }
+            else {
+                return _class + " circle comment";
             }
         });
-        this.node.transition()
-            .attr("transform", function (d) {
-            return "translate(" + d.x + "," + d.y + ")";
-        });
-        ;
         var me = this;
-        var circle = this.node.append("circle")
-            .attr("r", function (d) { return d.r * 1.1; })
+        var circle = d3.selectAll("." + _class + ".circle").append("circle")
+            .attr("r", function (d) {
+            return d.r * 1.1;
+        })
             .style("fill", function (d) {
             me.gradientTheColor(d.data.color);
             return "url(#radial-gradient" + d.data.color + ")";
         })
             .style("opacity", function (d) { return 1; });
-        circle.on("mousedown", function (d) {
-            // alert(d.r);
-            d3.select(this).attr("r", function (d) {
-                return d.r * 1.5;
-            });
-        });
-        circle.on("mouseup", function (d) {
-            d3.select(this).attr("r", function (d) {
-                return d.r;
-            });
-        });
-        var text = this.node.append("text").
-            attr("cx", function (d) {
-            return d.x;
-        })
-            .attr("cy", function (d) { return d.y; })
+        this.decorateCommentBubbles();
+        var text = d3.selectAll(".circle").append("text")
             .attr("text-anchor", "middle")
             .attr("id", function (d) {
             var id = d.data.name.replace(" ", "_");
             return id.substring(1);
         })
-            .attr("class", "bubbles")
+            .attr("class", function (d) {
+            if (d.data.IsComment == 1)
+                return "c_bubbletext";
+            else
+                return "bubbletext";
+        })
             .style("cursor", "pointer")
-            .text(function (d) { return d.data.name; })
-            .attr("font-size", function (d) { return d.r / 2.3 + "px"; })
+            .text(function (d) {
+            if (d.data.IsComment == 1) {
+                if (d.data.rfreq > 2) {
+                    return d.data.name.substring(1, 12) + "...";
+                }
+                else {
+                    return d.data.rfreq;
+                }
+            }
+            else
+                return d.data.name.replace("_", " ");
+        })
+            .attr("font-size", function (d) {
+            if (d.data.IsComment == 1) {
+                return "20px";
+            }
+            return d.r / 2.3 + "px";
+        })
             .attr("font-family", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
-        text.on("mousedown", function (d) {
+        d3.selectAll(".bubbletext").on("mousedown", function (d) {
             var tag = d.data.name.substring(1);
             me.router.navigate(['/Tags', tag]);
         });
+        d3.selectAll(".comment").on("mousedown", function (d) {
+            var title = d.data.name;
+            // alert(d.data.postid);
+            me.router.navigate(['/Posts', d.data.postid]);
+        });
         d3.selectAll("g.nodeE").transition().duration(1500)
             .attr("transform", function (d) {
-            if (typeof d != 'undefined')
+            if (typeof d != 'undefined') {
                 if (d.y < (400))
-                    return "translate(" + (d.x - 150) + "," + (d.y - 28) + ")";
+                    return "translate(" + (d.x - 80) + "," + (d.y - 28) + ")";
                 else
-                    return "translate(" + (d.x - 150) + "," + (d.y + 28) + ")";
+                    return "translate(" + (d.x - 80) + "," + (d.y + 35) + ")";
+            }
         });
         d3.selectAll("g.nodeO").transition().duration(1500)
             .attr("transform", function (d) {
             if (typeof d != 'undefined')
                 if (d.y < (400))
-                    return "translate(" + (d.x - 150) + "," + (d.y - 28) + ")";
+                    return "translate(" + (d.x - 0) + "," + (d.y - 28) + ")";
                 else
-                    return "translate(" + (d.x - 150) + "," + (d.y + 28) + ")";
+                    return "translate(" + (d.x - 0) + "," + (d.y + 35) + ")";
         });
     };
     D3Bubbles.prototype.SetWidth = function (value) {

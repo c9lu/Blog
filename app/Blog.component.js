@@ -99,7 +99,7 @@ var BlogComponent = (function () {
             moduleId: module.id,
             templateUrl: 'blog.html',
             styleUrls: ['blog.css'],
-            providers: [Blog_service_1.BlogService, CreateBubbles_1.CreateBubbles] // the injector relies on providers to create instances of the services
+            providers: [CreateBubbles_1.CreateBubbles] // the injector relies on providers to create instances of the services
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, Blog_service_1.BlogService, http_1.Http, CreateBubbles_1.CreateBubbles])
     ], BlogComponent);

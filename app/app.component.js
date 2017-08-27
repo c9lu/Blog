@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //var mongoose = require("./mango.api.js")
 var core_1 = require('@angular/core');
+var AuthenticationService_1 = require('./AuthenticationService');
+var Blog_service_1 = require('./Blog.service');
 //https://github.com/angular/angular/issues/10646
 var AppComponent //implements OnInit
  = (function () {
@@ -25,7 +27,8 @@ var AppComponent //implements OnInit
             ///</li>
             moduleId: module.id,
             templateUrl: 'app.html',
-            styleUrls: ['app.css']
+            styleUrls: ['app.css'],
+            providers: [AuthenticationService_1.AuthService, Blog_service_1.BlogService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent //implements OnInit

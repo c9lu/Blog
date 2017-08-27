@@ -46,12 +46,15 @@ var CreateBubbles = (function () {
             if (index % 2 == 0 && this.isEven == true || index % 2 == 1 && this.isEven == false) {
                 data.children.push({
                     "frequency": frequency * 2.5,
-                    "color": color, "name": "#" + element.toString()
+                    "color": color, "name": "#" + element.toString(), "IsComment": val[element].IsComment,
+                    "rfreq": frequency, "postid": val[element].IsComment == 1 ? val[element].PostIDs[0] : 0
                 });
-                data.children.push({
-                    "frequency": 1,
-                    "color": color, "name": ""
-                });
+                if (val[element].IsComment == 0) {
+                    data.children.push({
+                        "frequency": 1,
+                        "color": color, "name": "", "IsComment": val[element].IsComment
+                    });
+                }
             }
             index++;
         }
@@ -67,9 +70,9 @@ var CreateBubbles = (function () {
             d3Result.subscribe(function (val) {
                 _this.Data = _this.getD3Data(val);
                 if (_this.isEven == true)
-                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(700).SetHeight(850).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
                 else
-                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
+                    new D3Bubbles_1.D3Bubbles(me.router).SetWidth(700).SetHeight(850).Chart(_this.div.nativeElement, _this.Data, _this.isEven);
             });
         }
     };
@@ -79,7 +82,6 @@ var CreateBubbles = (function () {
     ], CreateBubbles.prototype, "div", void 0);
     CreateBubbles = __decorate([
         core_1.Component({
-            providers: [Blog_service_1.BlogService],
             template: "<div #container></div>",
             selector: 'bubble-panes'
         }), 
@@ -98,7 +100,6 @@ var rightBubbles = (function (_super) {
     }
     rightBubbles = __decorate([
         core_1.Component({
-            providers: [Blog_service_1.BlogService],
             template: "<div #container></div>",
             selector: 'bubble-panes-right',
         }), 
@@ -117,7 +118,6 @@ var leftBubbles = (function (_super) {
     }
     leftBubbles = __decorate([
         core_1.Component({
-            providers: [Blog_service_1.BlogService],
             template: "<div #container></div>",
             selector: 'bubble-panes-left'
         }), 

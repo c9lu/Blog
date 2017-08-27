@@ -14,28 +14,37 @@ var app_component_1 = require('./app.component');
 var post_detail_1 = require('./post-detail');
 var AppRoutes_1 = require('./AppRoutes');
 var Blog_component_1 = require("./Blog.component");
+var Login_Component_1 = require("./Login.Component");
 var http_1 = require('@angular/http');
 var CreateBubbles_1 = require("./CreateBubbles");
 var CreateBubbles_2 = require("./CreateBubbles");
-var Blog_service_1 = require('./Blog.service');
+var AuthenticationService_1 = require('./AuthenticationService');
+var forms_1 = require('@angular/forms');
+var app_header_1 = require('./app.header');
+var post_comment_1 = require('./post.comment');
+var $ = require("jquery");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.HttpModule,
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 //
                 AppRoutes_1.routing
             ],
             declarations: [
+                app_header_1.AppHeader,
                 app_component_1.AppComponent,
                 Blog_component_1.BlogComponent,
                 post_detail_1.PostDetailComponent,
                 CreateBubbles_1.rightBubbles,
-                CreateBubbles_2.leftBubbles
+                CreateBubbles_2.leftBubbles,
+                Login_Component_1.LoginComponent,
+                post_comment_1.PostCommentComponent
             ],
             providers: [
-                Blog_service_1.BlogService
+                AuthenticationService_1.AuthService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

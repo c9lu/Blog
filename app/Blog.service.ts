@@ -6,23 +6,26 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {comment} from "./comment";
+import {getFreqObj} from "./app.functions";
 
-var  frequencyMap ;
+
 @Injectable()
 export class BlogService {
 
    private results:Post[];
    private apiURL = environment.webApiURL;
-  
+   public  frequencyMap ={};
    constructor(private http: Http){
-   
+     
    }
 
   
    private buildPostObjectFromJson(jsonString:any):Post{
        
-            return new Post(Number(jsonString.id), jsonString.title, jsonString.image, jsonString.html, jsonString.createdate);
-            
+            let post = new Post(Number(jsonString.id), jsonString.title, jsonString.image, jsonString.html, jsonString.createdate);
+            post.comments = jsonString.postcomments;
+            return post;
       }
 
      private buildPostObjectsFromJson(jsonArray:any):Post[]{
@@ -34,35 +37,49 @@ export class BlogService {
             }
             return results;
         }     
-   
     
+    /* private retrievePostComments(jsonArray:any):any{
+         let frequencyMap = {};
+        
+             
+          //  if(element.postcomments.length!=null && element.postcomments.length>0){
+        frequencyMap = jsonArray.map((element)=>{
+                 return   getFreqObj(frequencyMap, element, "title", element.postcomments!=null? element.postcomments.length:0);
+                     
+
+                });
+       
+         
+
+     }*/
+    public savePostComments(comment):any{
+
+       var result= this.http.post(this.apiURL+'/savecomment',comment);
+       return result;
+    }
     private retrieveTagsFrequencyFromPosts(jsonArray:any): any {
 
-        frequencyMap = {};//{};
-        let index =0;
-        for(let element of jsonArray){
-      
-            index = index+1;
-            let obj = {};
-            for(let t of element.tags){
-                
-                if(t.indexOf(' ')>0){
-                    t = t.replace(' ','_');
-                }
-
-                if(frequencyMap[t]==null){
-                    frequencyMap[t] = {count:1, PostIDs:[]}
-                
-                    frequencyMap[t].PostIDs.push(element.id);
-                }
-                else {
-                    frequencyMap[t].count = frequencyMap[t].count+1;
-                    frequencyMap[t].PostIDs.push(element.id);
-                }
-            }
-
-        }
-        return frequencyMap;
+       
+    let index =0;
+    let self=this;
+    if(JSON.stringify(self.frequencyMap)=='{}'){//typeof(this.frequencyMap)=='undefined'){
+  //      this.frequencyMap={};
+        jsonArray.forEach((post)=>{
+            
+          post.tags.forEach((tag)=>{
+            tag= tag.replace(' ','_');
+            self.frequencyMap=  getFreqObj (self.frequencyMap, post, tag, 1, 0)
+            })
+        
+          if(typeof(post.postcomments)!='undefined'&& post.postcomments!=null){
+            post.postcomments.forEach((comment)=>{
+            self.frequencyMap = getFreqObj(self.frequencyMap, post, post.title, 1,1 )
+            })
+            }           
+       
+     });
+    }
+        return self.frequencyMap;
     }  
     getPostById(id: number){
       
@@ -78,12 +95,12 @@ export class BlogService {
    GetPostsFromTagName (tagName:string){
 
           var postIDs = [];
-          if(frequencyMap==null ||frequencyMap[tagName]==null){
+          if(this.frequencyMap==null ||this.frequencyMap[tagName]==null){
             return null;             
           }      
           else
           {
-            postIDs = frequencyMap[tagName].PostIDs.join("_");
+            postIDs = this.frequencyMap[tagName].PostIDs.join("_");
           }
            return this.http.get(this.apiURL+ '/MPosts/'+postIDs).map(
             response=> {
@@ -109,7 +126,8 @@ export class BlogService {
       
         return this.http.get(this.apiURL+ '/').map(response=>{
            
-            return this.retrieveTagsFrequencyFromPosts(response.json());
+            this.frequencyMap =  this.retrieveTagsFrequencyFromPosts(response.json());
+            return this.frequencyMap;
         });
     }
     getAllPosts()
@@ -121,6 +139,32 @@ export class BlogService {
            }); 
            
     }
-    
+    getPostComments(postID:Number){
+           return this.http.get(this.apiURL+'/Comments/'+postID).map(response=>{
+
+               return this.buildCommentObjects(response.json());
+           })
+
+    }
+
+    buildCommentObjects(jsonObject:any):comment[]{
+        
+        let comments : comment[] = new Array<comment>();
+        for(let pc of jsonObject[0].postcomments){
+            if(pc.author==null || pc.author==""){
+                pc.author = "Anonymous";
+            }
+            var c = new comment(Number(pc.postid),pc.content, pc.author , pc.id);
+            comments.push(c);
+        }
+       
+        
+        return comments;
+    }
+
+    deleteComment(_postid:number, _commentid:number){
+        let comment ={postid: _postid, commentid: _commentid}
+        return this.http.post(this.apiURL +'/deletecomment', comment );
+    }
 
 }

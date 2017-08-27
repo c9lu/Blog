@@ -13,7 +13,7 @@ import {BlogService} from './Blog.service'; //import is from ES6.
 import {D3Bubbles} from './D3Bubbles';
 
 @Component({
-    providers:[BlogService],
+
     template: `<div #container></div>`,
     selector:'bubble-panes'
 })
@@ -39,7 +39,7 @@ export class CreateBubbles{
          }
         return color;
     }
-    getD3Data(val){
+    getD3Data(val){//for tags
 
         let data={children:[]};
         let index:number =0;
@@ -51,16 +51,20 @@ export class CreateBubbles{
             var color = this.getRandomColor();
          
             if(index % 2==0 && this.isEven==true ||  index % 2==1 && this.isEven==false){
+                
                 data.children.push({
                           "frequency":frequency*2.5,
-                          "color":color, "name":"#"+element.toString()
+                          "color":color, "name":"#"+element.toString(), "IsComment":val[element].IsComment,
+                          "rfreq":frequency,"postid":val[element].IsComment==1?val[element].PostIDs[0]:0
                         
                        });
+              if(val[element].IsComment==0){
                data.children.push({
                       "frequency":1,
-                      "color":color, "name":""
+                      "color":color, "name":"", "IsComment":val[element].IsComment
 
                })
+              }
             }
                index++;
         }
@@ -83,9 +87,9 @@ export class CreateBubbles{
 
               this.Data= this.getD3Data(val);
            if(this.isEven==true)
-                new D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+                new D3Bubbles(me.router).SetWidth(700).SetHeight(850).Chart(this.div.nativeElement, this.Data, this.isEven);
             else
-                new D3Bubbles(me.router).SetWidth(800).SetHeight(800).Chart(this.div.nativeElement, this.Data, this.isEven);
+                new D3Bubbles(me.router).SetWidth(700).SetHeight(850).Chart(this.div.nativeElement, this.Data, this.isEven);
     
                 
 
@@ -95,7 +99,7 @@ export class CreateBubbles{
      }
 }
 @Component({
-    providers:[BlogService],
+
     template: `<div #container></div>`,
     selector:'bubble-panes-right',
     
@@ -112,7 +116,7 @@ export class rightBubbles extends CreateBubbles{
 }
 @Component({
     
-    providers:[BlogService],
+    
     template: `<div #container></div>`,
     selector:'bubble-panes-left'
 

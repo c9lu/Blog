@@ -3,28 +3,46 @@
 
 { 
 
-    width:25%;
+    width:35%;
     background-color:black;
     left:0;
    
     position:fixed;
     overflow-x:hidden;
-    z-index:1
-    
+    z-index:1;
+    background-color:black;
 } 
 
 .column-right
 
 { 
 
-     background-color:black;
-     width:25%;
+        
+     width:35%;
      right:0;
      position:fixed;
-     z-index:1
+     overflow-x: hidden;
+     z-index:1;
+     background-color:black;
+    
 }
 
+.column-center
 
+{ 
+    
+   
+    opacity:1;
+    margin-left:35%;
+    background-color:black;
+    margin-right:35%;
+    width: 30%;
+
+    margin-top:-50px;
+
+    
+
+}
 
 
 @media screen and (min-width: 0px) and (max-width: 800px) {
@@ -37,7 +55,7 @@
 
 
 
-.container
+/*.container
 {
     width:50%;
     margin:0 auto;
@@ -45,7 +63,7 @@
     
 
 }
-
+*/
 
 .column-center
 
@@ -53,10 +71,10 @@
     
    
     opacity:1;
-    margin-left:25%;
+    margin-left:0;
     background-color:black;
-    margin-right:25%;
-    width: 50%;
+    margin-right:0;
+    width: 100%;
 
 }
 

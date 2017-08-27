@@ -1,14 +1,16 @@
-<div class="app">
-
-<p  class="row orangeText" align="center">Note you can filter the posts by clicking on the #tags in the bubbles or by clicking on the clouds below</p>
 
 
-<div class="row justify-content-md-center">
-<ul style="padding:0;">
- <li>
-  
+<div>
+
+
+ <div class="row justify-content-md-center">
+   
+<ul align="center">
+
+
+  <li>
        <a [routerLink]="['/Category/programming']">
-    
+   
         <svg viewBox='20 0 105 105' height="150" width="250">
    
          <path d='M 15,60 
@@ -81,11 +83,14 @@
  
 <div class="row justify-content-md-center" align="center">
 
-   <div id="tagDiv" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif"><span>
+   <div id="tagDiv" align="center" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif; text-align:center">
+     <span>
       Tag:  {{selectedTag}}, # of posts: {{blog.Posts.length}}
-     </span></div>
+     </span>
+     
+     </div>
 
-     <div id="artDiv" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif">work in progress :)</div>
+     <div id="artDiv" align="center" style="display:none;color:#33CAFF; font-size:25px; font-family: Arial, Helvetica, sans-serif">work in progress :)</div>
     
     
     <ul  align="center" style="padding:0;">
@@ -93,13 +98,16 @@
            
             <figure>
               <a [routerLink]="['/Posts', post.id]">
+               <!--  <img src="Images/purplecomment.png" style="position:relative; bottom:-50px; left:180px; width:150px; height:80px; z-index:3"/>
+             -->
                 <img  src="Images/{{post.image}}.jpg"  onerror="this.onerror=null;this.src='Images/3_c.jpg'"   class="post_images"/>
                 <figcaption>
                     <span class ="caption" >   
                     <span style="color:white"> {{post.title}}</span>
               
                       
-                      <span class="innerspan"></span></span>
+                      <span class="innerspan"></span>
+                    </span>
                 
                 </figcaption>
                  

@@ -27,7 +27,7 @@ export class Blog {
   moduleId: module.id,
   templateUrl:'blog.html',  
   styleUrls:['blog.css'],
-  providers:[BlogService, CreateBubbles] // the injector relies on providers to create instances of the services
+  providers:[CreateBubbles] // the injector relies on providers to create instances of the services
 })
 export class BlogComponent implements OnInit
 { 

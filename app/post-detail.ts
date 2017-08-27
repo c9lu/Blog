@@ -1,12 +1,13 @@
 import {Component, Input, OnChanges,  animate, transition, style, state, trigger, OnInit} from '@angular/core';
 import {Post} from './post';
 import {BlogService} from './Blog.service';
-import {Blog} from './Blog.component';
+import {PostCommentComponent}from './post.comment';
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Params , Router} from '@angular/router';
-
+import {Ng2SimplePageScrollModule} from 'ng2-simple-page-scroll/ng2-simple-page-scroll';
+import {comment} from './comment'
 //import {Injectable} from 'angular'
 @Component({
     selector:'post-detail',
@@ -18,29 +19,25 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
         transition('shown => hidden', animate('1000ms')),    
         transition('hidden => shown', animate('1000ms'))                           
     ])
-    ],*/
-    template:`<div class="column-center post" >
+    ],
+     <comments-area (commentsCount)="onNotify($event)"></comments-area>*/
+    template:`<div class="app post">
+    
     <p style="font-size:22px; color:white;font-family:Calibri">{{post?.title}}</p>
-    <p style="font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
-    <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px"></div></div>`,
+    <div>
+    <p style="float:left ;font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
+    <span style="color:aqua; float:right" *ngIf="comments?.length>0">{{comments?.length}} comments</span>
+    <a simplePageScroll href="#commentssection" style="display:none"></a>
+    </div>
+    
+    <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px; width:100%; clear:both"></div></div>
+    <div id="commentssection">
+       <comments-area [comments]="comments"></comments-area>
+    </div>
+    `,
     styles:[
             `
-            @media screen and (min-width: 0px) and (max-width: 800px) {
-                .post
-                {
-                        margin-left:-70px;
-                       
-                        padding-left:0px;
-                        width:160%;
-                        
-                        
-                }
-
-               .sidecontainer{width:0; display:none}
- 
-               
-             
-        }
+          
    @media screen and (min-width: 801px) {
 
 
@@ -48,32 +45,38 @@ import { ActivatedRoute, Params , Router} from '@angular/router';
    .post
                 {
                         
-                        max-width:60%;
-                        margin-right:auto;
-                        margin-left:auto;
+                        width:100%;
+                        margin-right:0;
+                        margin-left:0;
                         
                 }
 }
 
     `
 
-    ],
-    providers:[BlogService]
+    ]
+    //providers:[BlogService]
     
         
 })
 
 export class PostDetailComponent implements OnInit{
-        @Input() post: Post;
         
-       
+        
+        commentsCount:string;
+        
+        comments: Array<comment>;
+        post: Post;
         myTemplate=''
         constructor(private blogService:BlogService, private route: ActivatedRoute){
         }
               
              
    
-        
+        onNotify(message:string):void{
+                //alert(message);
+                this.commentsCount = message;
+        }
         ngOnInit(){ 
                 let me = this;            
                 let id=0;
@@ -96,6 +99,7 @@ export class PostDetailComponent implements OnInit{
                                 $("#loader").hide();
                                me.blogService.getPostById(id).subscribe(p=>{
                                        me.post=p;
+                                       me.comments = p.comments;
                                   
                                 });
                            } 

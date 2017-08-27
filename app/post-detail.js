@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var post_1 = require('./post');
 var Blog_service_1 = require('./Blog.service');
 require('rxjs/add/operator/map');
 var router_1 = require('@angular/router');
@@ -20,6 +19,10 @@ var PostDetailComponent = (function () {
         this.route = route;
         this.myTemplate = '';
     }
+    PostDetailComponent.prototype.onNotify = function (message) {
+        //alert(message);
+        this.commentsCount = message;
+    };
     PostDetailComponent.prototype.ngOnInit = function () {
         var me = this;
         var id = 0;
@@ -33,14 +36,11 @@ var PostDetailComponent = (function () {
                 $("#loader").hide();
                 me.blogService.getPostById(id).subscribe(function (p) {
                     me.post = p;
+                    me.comments = p.comments;
                 });
             }
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', post_1.Post)
-    ], PostDetailComponent.prototype, "post", void 0);
     PostDetailComponent = __decorate([
         core_1.Component({
             selector: 'post-detail',
@@ -51,12 +51,12 @@ var PostDetailComponent = (function () {
                  transition('shown => hidden', animate('1000ms')),
                  transition('hidden => shown', animate('1000ms'))
              ])
-             ],*/
-            template: "<div class=\"column-center post\" >\n    <p style=\"font-size:22px; color:white;font-family:Calibri\">{{post?.title}}</p>\n    <p style=\"font-size:18px; color:white; font-family:Calibri\">Written on {{post?.createdate}}</p>\n    <div [innerHtml]=\"myTemplate\" style=\"color:white;font-family:Calibri; font-size:17px\"></div></div>",
+             ],
+              <comments-area (commentsCount)="onNotify($event)"></comments-area>*/
+            template: "<div class=\"app post\">\n    \n    <p style=\"font-size:22px; color:white;font-family:Calibri\">{{post?.title}}</p>\n    <div>\n    <p style=\"float:left ;font-size:18px; color:white; font-family:Calibri\">Written on {{post?.createdate}}</p>\n    <span style=\"color:aqua; float:right\" *ngIf=\"comments?.length>0\">{{comments?.length}} comments</span>\n    <a simplePageScroll href=\"#commentssection\" style=\"display:none\"></a>\n    </div>\n    \n    <div [innerHtml]=\"myTemplate\" style=\"color:white;font-family:Calibri; font-size:17px; width:100%; clear:both\"></div></div>\n    <div id=\"commentssection\">\n       <comments-area [comments]=\"comments\"></comments-area>\n    </div>\n    ",
             styles: [
-                "\n            @media screen and (min-width: 0px) and (max-width: 800px) {\n                .post\n                {\n                        margin-left:-70px;\n                       \n                        padding-left:0px;\n                        width:160%;\n                        \n                        \n                }\n\n               .sidecontainer{width:0; display:none}\n \n               \n             \n        }\n   @media screen and (min-width: 801px) {\n\n\n\n   .post\n                {\n                        \n                        max-width:50%;\n                        margin-right:auto;\n                        margin-left:auto;\n                        \n                }\n}\n\n    "
-            ],
-            providers: [Blog_service_1.BlogService]
+                "\n          \n   @media screen and (min-width: 801px) {\n\n\n\n   .post\n                {\n                        \n                        width:100%;\n                        margin-right:0;\n                        margin-left:0;\n                        \n                }\n}\n\n    "
+            ]
         }), 
         __metadata('design:paramtypes', [Blog_service_1.BlogService, router_1.ActivatedRoute])
     ], PostDetailComponent);
