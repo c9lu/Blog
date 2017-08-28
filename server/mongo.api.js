@@ -17,9 +17,9 @@ var dbConnect = function()
 { 
 
  
-       return MangoClient.connect("mongodb://127.0.0.1:27017/blog")
+      // return MangoClient.connect("mongodb://127.0.0.1:27017/blog")
  
-   //return MangoClient.connect("mongodb://blog-posts:mTtYNsHLRcNzaJuLkS0lMARrz4K1GgpTTZBpRGT9xNTF7q7HR7HA7vCHd0SlqhdKnVDAaVs7o2DOrXngOx5U0A==@blog-posts.documents.azure.com:10250/blog?ssl=true")
+   return MangoClient.connect("mongodb://blog-posts:mTtYNsHLRcNzaJuLkS0lMARrz4K1GgpTTZBpRGT9xNTF7q7HR7HA7vCHd0SlqhdKnVDAaVs7o2DOrXngOx5U0A==@blog-posts.documents.azure.com:10250/blog?ssl=true")
      .then( function(_Db){ 
 
        
@@ -119,16 +119,12 @@ exports.getCommentsById = function(_id){
      
     console.log('lets get comment by id');
     return dbConnect().then(function(db){
-           // var promise = new Promise( (resolve, reject)=>
-          //  { 
+          
                return db.collection('posts').findOne({id:parseInt(_id)},{postcomments:1});
-          //      resolve(dt);
+       
             });
 
-    //return promise;
-                
-
-  //  })//.catch(function(err){console.log('get comment err:'+err);});
+   
 
 }
 
@@ -142,8 +138,7 @@ exports.getPostsByIds = function(postsStr){
     console.log(postids);
     return dbConnect().then(
         function(db){
-                 //db.inventory.find( { status: { $in: [ "A", "D" ] } } )
-                 try{
+               try{
                     var dt= db.collection('posts').find({id:{$in: postids}} ).toArray();
                     console.log(dt);
                     return dt;
@@ -185,7 +180,7 @@ exports.saveComment = function(postid, comment){
    
    return dbConnect().then(
         function(db){
-               // console.log(comment.content);
+             
                return new Promise(db.collection('posts').update({id:parseInt(postid)},{$push:{postcomments: comment}
                 })).catch(function(err){
 
@@ -209,7 +204,7 @@ exports.deleteComment = function(postid, commentid){
              resolve("ok");
         })
         return promise;
-        //return promise.resolve("ok");
+       
 
     })
 

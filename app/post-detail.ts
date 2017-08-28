@@ -25,7 +25,7 @@ import {comment} from './comment'
     
     <p style="font-size:22px; color:white;font-family:Calibri">{{post?.title}}</p>
     <div>
-    <p style="float:left ;font-size:18px; color:white; font-family:Calibri">Written on {{post?.createdate}}</p>
+    <p style="float:left ;font-size:18px; color:white; font-family:Calibri" *ngIf="post?.createdate!=''">Written on {{post?.createdate}}</p>
     <span style="color:aqua; float:right" *ngIf="comments?.length>0">{{comments?.length}} comments</span>
     <a simplePageScroll href="#commentssection" style="display:none"></a>
     </div>
