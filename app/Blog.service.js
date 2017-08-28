@@ -117,7 +117,7 @@ var BlogService = (function () {
     };
     BlogService.prototype.buildCommentObjects = function (jsonObject) {
         var comments = new Array();
-        for (var _i = 0, _a = jsonObject[0].postcomments; _i < _a.length; _i++) {
+        for (var _i = 0, _a = jsonObject.postcomments; _i < _a.length; _i++) {
             var pc = _a[_i];
             if (pc.author == null || pc.author == "") {
                 pc.author = "Anonymous";

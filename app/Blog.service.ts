@@ -150,7 +150,7 @@ export class BlogService {
     buildCommentObjects(jsonObject:any):comment[]{
         
         let comments : comment[] = new Array<comment>();
-        for(let pc of jsonObject[0].postcomments){
+        for(let pc of jsonObject.postcomments){
             if(pc.author==null || pc.author==""){
                 pc.author = "Anonymous";
             }
