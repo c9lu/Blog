@@ -6,6 +6,6 @@
 const environment = {
   production: false,
   connectionString:'mongodb://127.0.0.1:27017/blog',
-  webApiURL: 'http://localhost:5000'
+  webApiURL: 'http://blogserviceapi.azurewebsites.net'
 };
 
