@@ -128,18 +128,18 @@ var D3Bubbles = (function () {
             .attr("transform", function (d) {
             if (typeof d != 'undefined') {
                 if (d.y < (400))
-                    return "translate(" + (d.x - 80) + "," + (d.y - 90) + ")";
+                    return "translate(" + (d.x - 80) + "," + (d.y - 80) + ")";
                 else
-                    return "translate(" + (d.x - 80) + "," + (d.y - 20) + ")";
+                    return "translate(" + (d.x - 80) + "," + (d.y - 10) + ")";
             }
         });
         d3.selectAll("g.nodeO").transition().duration(1500)
             .attr("transform", function (d) {
             if (typeof d != 'undefined')
                 if (d.y < (400))
-                    return "translate(" + (d.x - 0) + "," + (d.y - 90) + ")";
+                    return "translate(" + (d.x - 0) + "," + (d.y - 80) + ")";
                 else
-                    return "translate(" + (d.x - 0) + "," + (d.y - 20) + ")";
+                    return "translate(" + (d.x - 0) + "," + (d.y - 10) + ")";
         });
     };
     D3Bubbles.prototype.SetWidth = function (value) {
