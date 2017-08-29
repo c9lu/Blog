@@ -17,19 +17,18 @@ describe("mongoapi should return the user saved", function(){
 
         })
       
-    //});
+   
    });
  
-    it('using callback', function(){
+    it('using callback', function(done){
 
         
           user = mongoapi.getUser_callback('testuser904', function(res){
                 
-                console.log('hiiiiiloooo');
-                 
+              
                 expect(res.user).equals("testuser904");
                  
-              //  done();
+               done();
 
           });
     }); 
@@ -73,16 +72,14 @@ describe("it should also return the comment being saved", function(done){
             postid:1
         } 
         mongoapi.saveComment(1, mockComment);
-       
-       console.log('gagagagaggg');
 
-       //done();
+       done();
         
     });
 
     it("using promise", function() {
       return mongoapi.getCommentsById("1").then(function(res){
-            console.log('chssssssssssssss');
+            
             expect(res[res.length-1].content).equals('test save comment');
             //expect(res.user).equals('chen');
             //expect(res.content).equals('test save comment');
@@ -128,8 +125,6 @@ function(){
                     console.log("length after is "+ _length2);
                     expect (_length2).equals(2)
                 }
-
-
             )      
           }        
     );
