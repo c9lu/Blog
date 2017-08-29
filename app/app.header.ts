@@ -14,7 +14,7 @@ template:`
 
    
     <a href="" style="color:#ff3399;font-family:segoe print; text-align: center; font-size:30px; float:left">
-    Hello <span>{{userName}}, welcome!</span></a>
+    Hello <span>{{userName==null|| userName ==""?"guest":userName}}, welcome!</span></a>
 
 
  
