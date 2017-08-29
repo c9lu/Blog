@@ -46,25 +46,7 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
  
 }
 
- 
 
-/* ngAfterViewInit(){
-   let me= this;
-  setTimeout(function(){
-    alert('bind click event');
-    $(".bubbles").click(function(e){
-
-    
-      var tag = $(this).attr('id');
-       me.selectedTag = tag;
-      me.router.navigate(['/Tags', tag]);
-    
-
-    })
-   },1500);
-
- 
- }*/
 
   ngOnInit(){ 
     let me = this;
@@ -100,11 +82,11 @@ constructor(private activatedRoute:ActivatedRoute, private router:Router ,privat
         else if( id!= null && id!=""){
          
             $("#artDiv").hide();
-            if(id=="art")
+            /*if(id=="art")
             {
               $("#artDiv").show();
 
-            }
+            }*/
            me.blogService.getPostsByCategory(id).subscribe(val=> { 
              me.blog.Posts = val;          
              $("#loader").hide();

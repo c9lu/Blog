@@ -12,6 +12,14 @@ text{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
 }
+.programmingViewBox{
+    width:250px;
+    height:150px;
+}
+.artViewBox{
+    width:230px;
+    height:165px;
+}
           
 .blocks{
     
@@ -95,11 +103,15 @@ figure{
     width:90%; height:90%;
    
 }
-#art-cloud{
-    display:none;
-
- }
-
+.programmingViewBox{
+    width:150px;
+    height:90px;
+}
+.artViewBox{
+    width:150px;
+    height:105px;
+    
+}
 figure{
 
     position:relative; margin-bottom:20px;
