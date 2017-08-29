@@ -3,7 +3,7 @@
 
 { 
 
-    width:35%;
+    width:32%;
     background-color:black;
     left:0;
    
@@ -18,7 +18,7 @@
 { 
 
         
-     width:35%;
+     width:32%;
      right:0;
      position:fixed;
      overflow-x: hidden;
@@ -33,12 +33,12 @@
     
    
     opacity:1;
-    margin-left:35%;
+    margin-left:32%;
     background-color:black;
-    margin-right:35%;
-    width: 30%;
+    margin-right:32%;
+    width: 36%;
 
-    margin-top:-50px;
+   
 
     
 
