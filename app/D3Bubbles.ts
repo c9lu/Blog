@@ -181,9 +181,9 @@ export class D3Bubbles{
            if(typeof d!= 'undefined')
            {     
                 if(d.y<(400))
-                    return "translate(" + (d.x-80) + "," + (d.y-80) + ")";
+                    return "translate(" + (d.x-80) + "," + (d.y-135) + ")";
                 else
-                    return "translate(" + (d.x-80) + "," + (d.y-10) + ")";
+                    return "translate(" + (d.x-80) + "," + (d.y-60) + ")";
 
            }  
 
@@ -195,9 +195,9 @@ export class D3Bubbles{
           if(typeof d!= 'undefined')
            
               if(d.y<(400))
-                return "translate(" + (d.x-0) + "," + (d.y-80) + ")";
+                return "translate(" + (d.x-0) + "," + (d.y-135) + ")";
               else
-                  return "translate(" + (d.x-0) + "," + (d.y-10) + ")";
+                  return "translate(" + (d.x-0) + "," + (d.y-60) + ")";
 
         });
 
