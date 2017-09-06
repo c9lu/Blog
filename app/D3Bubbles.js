@@ -137,9 +137,9 @@ var D3Bubbles = (function () {
             .attr("transform", function (d) {
             if (typeof d != 'undefined')
                 if (d.y < (400))
-                    return "translate(" + (d.x - 0) + "," + (d.y - 135) + ")";
+                    return "translate(" + (d.x - 30) + "," + (d.y - 135) + ")";
                 else
-                    return "translate(" + (d.x - 0) + "," + (d.y - 60) + ")";
+                    return "translate(" + (d.x - 30) + "," + (d.y - 60) + ")";
         });
     };
     D3Bubbles.prototype.SetWidth = function (value) {
