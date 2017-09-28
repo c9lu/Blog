@@ -16,7 +16,7 @@ export class User{
 @Injectable()
 export class AuthService{
  currentUser: User;
- private apiURL ='http://localhost:5000';
+ private apiURL =environment.webApiURL;
   s_userInfo:EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private http:Http){}
