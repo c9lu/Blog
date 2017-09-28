@@ -22,7 +22,7 @@ exports.User = User;
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.apiURL = 'http://localhost:5000';
+        this.apiURL = environment.webApiURL;
         this.s_userInfo = new core_1.EventEmitter();
     }
     AuthService.prototype.login = function (_input) {
