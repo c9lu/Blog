@@ -23,6 +23,9 @@ var PostDetailComponent = (function () {
         //alert(message);
         this.commentsCount = message;
     };
+    PostDetailComponent.prototype.likePost = function () {
+        alert(this.post.id);
+    };
     PostDetailComponent.prototype.ngOnInit = function () {
         var me = this;
         var id = 0;
@@ -53,7 +56,7 @@ var PostDetailComponent = (function () {
              ])
              ],
               <comments-area (commentsCount)="onNotify($event)"></comments-area>*/
-            template: "<div class=\"app post\">\n    \n    <p style=\"font-size:22px; color:white;font-family:Calibri\">{{post?.title}}</p>\n    <div>\n    <p style=\"float:left ;font-size:18px; color:white; font-family:Calibri\" *ngIf=\"post?.createdate!=''\">Written on {{post?.createdate}}</p>\n    <span style=\"color:aqua; float:right\" *ngIf=\"comments?.length>0 && comments?.length<2\">{{comments?.length}} comment</span>\n    <span style=\"color:aqua; float:right\" *ngIf=\"comments?.length>1\">{{comments?.length}} comments</span>\n    <a simplePageScroll href=\"#commentssection\" style=\"display:none\"></a>\n    </div>\n    \n    <div [innerHtml]=\"myTemplate\" style=\"color:white;font-family:Calibri; font-size:17px; width:100%; clear:both\"></div></div>\n    <div id=\"commentssection\">\n       <comments-area [comments]=\"comments\"></comments-area>\n    </div>\n    ",
+            template: "<div class=\"app post\">\n    <button (click) =\"likePost()\" style=\"display:none\">Like</button>\n    <p style=\"font-size:22px; color:white;font-family:Calibri\">{{post?.title}}</p>\n    <div>\n    <p style=\"float:left ;font-size:18px; color:white; font-family:Calibri\" *ngIf=\"post?.createdate!=''\">Written on {{post?.createdate}}</p>\n    <span style=\"color:aqua; float:right\" *ngIf=\"comments?.length>0 && comments?.length<2\">{{comments?.length}} comment</span>\n    <span style=\"color:aqua; float:right\" *ngIf=\"comments?.length>1\">{{comments?.length}} comments</span>\n    <a simplePageScroll href=\"#commentssection\" style=\"display:none\"></a>\n    </div>\n    \n    <div [innerHtml]=\"myTemplate\" style=\"color:white;font-family:Calibri; font-size:17px; width:100%; clear:both\"></div></div>\n    br/>\n    <div id=\"commentssection\">\n       <comments-area [comments]=\"comments\"></comments-area>\n    </div>\n    ",
             styles: [
                 "\n          \n   @media screen and (min-width: 801px) {\n\n\n\n   .post\n                {\n                        \n                        width:100%;\n                        margin-right:0;\n                        margin-left:0;\n                        \n                }\n}\n\n    "
             ]

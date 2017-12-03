@@ -9,6 +9,7 @@ import {LoginComponent} from "./Login.Component";
 import { HttpModule, JsonpModule } from '@angular/http';
 import {rightBubbles} from "./CreateBubbles";
 import {leftBubbles} from "./CreateBubbles";
+import {BubblesTopBottom,topBubbles, bottomBubbles} from './BubblesTopBottom'
 import {BlogService} from './Blog.service';
 import {AuthService} from './AuthenticationService';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
@@ -31,8 +32,10 @@ var $ = require("jquery");
        rightBubbles,
        leftBubbles,
        LoginComponent,
-       
-       PostCommentComponent
+       BubblesTopBottom,
+       PostCommentComponent,
+       topBubbles,
+       bottomBubbles
      
     //  BlogAppRoutes
     ],

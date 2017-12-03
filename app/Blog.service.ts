@@ -31,10 +31,11 @@ export class BlogService {
      private buildPostObjectsFromJson(jsonArray:any):Post[]{
        let results = [];
         for (let element of jsonArray){
-  
-          results.push(new Post(Number(element.id), element.title, element.image, element.content, element.createdate));
+            let post = new Post(Number(element.id), element.title, element.image, element.content, element.createdate);
+            post.comments = element.postcomments;
+          results.push( post);
+        }
             
-            }
             return results;
         }     
     
@@ -52,6 +53,10 @@ export class BlogService {
          
 
      }*/
+
+    public likePost (postid){
+       // this.http.post(this.apiURL +'/')
+    }
     public savePostComments(comment):any{
 
        var result= this.http.post(this.apiURL+'/savecomment',comment);

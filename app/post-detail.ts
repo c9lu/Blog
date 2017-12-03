@@ -22,7 +22,7 @@ import {comment} from './comment'
     ],
      <comments-area (commentsCount)="onNotify($event)"></comments-area>*/
     template:`<div class="app post">
-    
+    <button (click) ="likePost()" style="display:none">Like</button>
     <p style="font-size:22px; color:white;font-family:Calibri">{{post?.title}}</p>
     <div>
     <p style="float:left ;font-size:18px; color:white; font-family:Calibri" *ngIf="post?.createdate!=''">Written on {{post?.createdate}}</p>
@@ -32,6 +32,7 @@ import {comment} from './comment'
     </div>
     
     <div [innerHtml]="myTemplate" style="color:white;font-family:Calibri; font-size:17px; width:100%; clear:both"></div></div>
+    br/>
     <div id="commentssection">
        <comments-area [comments]="comments"></comments-area>
     </div>
@@ -71,12 +72,16 @@ export class PostDetailComponent implements OnInit{
         myTemplate=''
         constructor(private blogService:BlogService, private route: ActivatedRoute){
         }
-              
-             
+  
    
         onNotify(message:string):void{
                 //alert(message);
                 this.commentsCount = message;
+        }
+       
+        likePost(){
+
+                alert(this.post.id);
         }
         ngOnInit(){ 
                 let me = this;            

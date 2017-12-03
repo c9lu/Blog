@@ -48,7 +48,7 @@ var AppHeader = (function () {
     AppHeader = __decorate([
         core_1.Component({
             selector: 'appheader',
-            template: "\n<div>\n\n  \n  <div style=\"margin: 0 auto; width:70%\"> \n\n   \n    <a href=\"\" style=\"color:#ff3399;font-family:segoe print; text-align: center; font-size:30px; float:left\">\n    Hello <span>{{userName==null|| userName ==\"\"?\"guest\":userName}}, welcome!</span></a>\n\n\n \n</div>\n\n<div> <a href=\"./Login\" style=\"font-size:22px; color:white; float:right; padding:5px\" id=\"loginBtn\">Login</a>\n<button (click)=\"logout()\" style=\"font-size:22px; color:white; float:right; padding:5px;background-color:black; border:black; cursor:pointer\" id=\"logoutBtn\">Logout</button>\n</div>\n\n"
+            template: "\n<div style=\"margin-top:100px\">\n\n  \n  <div style=\"margin: 0 auto; width:70%\"> \n\n   \n    <a href=\"\" style=\"color:#ff3399;font-family:segoe print; text-align: center; font-size:30px; float:left\">\n    Hello <span>{{userName==null|| userName ==\"\"?\"guest\":userName}}, welcome!</span></a>\n\n\n \n</div>\n\n<div> <a href=\"./Login\" style=\"font-size:22px; color:white; float:right; padding:5px\" id=\"loginBtn\">Login</a>\n<button (click)=\"logout()\" style=\"font-size:22px; color:white; float:right; padding:5px;background-color:black; border:black; cursor:pointer\" id=\"logoutBtn\">Logout</button>\n</div>\n\n"
         }), 
         __metadata('design:paramtypes', [AuthenticationService_1.AuthService, router_1.Router, common_1.Location])
     ], AppHeader);

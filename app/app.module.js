@@ -18,6 +18,7 @@ var Login_Component_1 = require("./Login.Component");
 var http_1 = require('@angular/http');
 var CreateBubbles_1 = require("./CreateBubbles");
 var CreateBubbles_2 = require("./CreateBubbles");
+var BubblesTopBottom_1 = require('./BubblesTopBottom');
 var AuthenticationService_1 = require('./AuthenticationService');
 var forms_1 = require('@angular/forms');
 var app_header_1 = require('./app.header');
@@ -41,7 +42,10 @@ var AppModule = (function () {
                 CreateBubbles_1.rightBubbles,
                 CreateBubbles_2.leftBubbles,
                 Login_Component_1.LoginComponent,
-                post_comment_1.PostCommentComponent
+                BubblesTopBottom_1.BubblesTopBottom,
+                post_comment_1.PostCommentComponent,
+                BubblesTopBottom_1.topBubbles,
+                BubblesTopBottom_1.bottomBubbles
             ],
             providers: [
                 AuthenticationService_1.AuthService

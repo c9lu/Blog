@@ -30,7 +30,9 @@ var BlogService = (function () {
         var results = [];
         for (var _i = 0, jsonArray_1 = jsonArray; _i < jsonArray_1.length; _i++) {
             var element = jsonArray_1[_i];
-            results.push(new post_1.Post(Number(element.id), element.title, element.image, element.content, element.createdate));
+            var post = new post_1.Post(Number(element.id), element.title, element.image, element.content, element.createdate);
+            post.comments = element.postcomments;
+            results.push(post);
         }
         return results;
     };
@@ -48,6 +50,9 @@ var BlogService = (function () {
          
 
      }*/
+    BlogService.prototype.likePost = function (postid) {
+        // this.http.post(this.apiURL +'/')
+    };
     BlogService.prototype.savePostComments = function (comment) {
         var result = this.http.post(this.apiURL + '/savecomment', comment);
         return result;

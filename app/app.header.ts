@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 @Component({
 selector:'appheader',
 template:`
-<div>
+<div style="margin-top:100px">
 
   
   <div style="margin: 0 auto; width:70%"> 
