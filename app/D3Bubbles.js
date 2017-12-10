@@ -7,15 +7,34 @@ var D3Bubbles = (function () {
     function D3Bubbles(router) {
         this.router = router;
     }
-    D3Bubbles.prototype.gradientTheColor = function (colorcode) {
+    D3Bubbles.prototype.isDarkColor = function (colorCode) {
+        // remove hash character from string
+        var rawColor = colorCode.substring(1, colorCode.length());
+        // convert hex string to int
+        var rgb = Number.parseInt(rawColor, 16);
+        var r = (rgb >> 16) & 0xff;
+        var g = (rgb >> 8) & 0xff;
+        var b = (rgb >> 0) & 0xff;
+        var result = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        if (result < 40) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    D3Bubbles.prototype.gradientTheColor = function (colorcode, freq) {
         var gradientColor = this.SVGContainer.append("defs")
             .append("radialGradient")
             .attr("id", "radial-gradient" + colorcode);
+        var centerColor = colorcode;
+        //if(this.isDarkColor(colorcode)==false)
         gradientColor.append("stop")
-            .attr("offset", "0%")
-            .attr("stop-color", "#FBEFFB");
+            .attr("offset", "60%")
+            .attr("stop-color", "black");
+        // .style("opacity", 0.5);
         gradientColor.append("stop")
-            .attr("offset", "100%")
+            .attr("offset", "80%")
             .attr("stop-color", colorcode);
     };
     D3Bubbles.prototype.decorateCommentBubbles = function () {
@@ -75,13 +94,12 @@ var D3Bubbles = (function () {
         var me = this;
         var circle = d3.selectAll("." + _class + ".circle").append("circle")
             .attr("r", function (d) {
-            return d.r * 1.1;
+            return d.r * 1.4;
         })
             .style("fill", function (d) {
-            me.gradientTheColor(d.data.color);
+            me.gradientTheColor(d.data.color, d.data.rfreq);
             return "url(#radial-gradient" + d.data.color + ")";
-        })
-            .style("opacity", function (d) { return 1; });
+        });
         this.decorateCommentBubbles();
         var text = d3.selectAll(".circle").append("text")
             .attr("text-anchor", "middle")
@@ -114,7 +132,11 @@ var D3Bubbles = (function () {
             }
             return d.r / 2.3 + "px";
         })
-            .attr("font-family", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif");
+            .attr("font-family", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif")
+            .style("fill", function (d) { return d.data.color; });
+        /*  .style("fill", function(d) {
+                    me.gradientTheColor(d.data.color, d.data.rfreq)
+                    return "url(#radial-gradient"+d.data.color+")"; })*/
         d3.selectAll(".bubbletext").on("mousedown", function (d) {
             var tag = d.data.name.substring(1);
             me.router.navigate(['/Tags', tag]);
