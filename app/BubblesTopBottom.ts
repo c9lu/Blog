@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {OnInit, Directive} from '@angular/core'
 
 var d3 = require("d3");
-
+//var colorIndex=10
 
 @Component({
     selector:'top-bottom-bubbles',
@@ -23,14 +23,7 @@ export class BubblesTopBottom implements OnInit{
 
         return Math.random()*(max-min)+min;
     }
-    private  getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.floor(Math.random() * 16)];
-         }
-        return color;
-    }
+    
     ngOnInit(){
         var self= this;
          if(this.position=='top')
@@ -44,11 +37,13 @@ export class BubblesTopBottom implements OnInit{
         self.svg.attr("height", this.chartHeight)
         .attr("width", this.chartWidth);
         for (let i =0; i<(window.innerWidth/10); i=i+2){
+            var colorIndex = i+1;
+             var _color= "hsl("+colorIndex + ", 100%, 50%)"
             self._data.push({
-                x:self.getRandomArbitary(i, window.innerWidth), //i+ Math.random()*12+1,
+                x:i *20,//getRandomArbitary(i, window.innerWidth), //i+ Math.random()*12+1,
                 y:self.getRandomArbitary(10, 35),
                 r:self.getRandomArbitary(15, 30),
-                
+                color:_color
 
             })
         } 
@@ -69,7 +64,11 @@ export class BubblesTopBottom implements OnInit{
             {
                 return list.y
             })
-            .style("fill", function(){return self.getRandomColor() } )
+            .style("fill", function(){
+              
+                return list.color 
+            //    return self.getRandomColor() 
+            } )
         
         })
     }

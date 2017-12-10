@@ -15,6 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var d3 = require("d3");
+//var colorIndex=10
 var BubblesTopBottom = (function () {
     function BubblesTopBottom() {
         this.chartWidth = window.innerWidth;
@@ -23,14 +24,6 @@ var BubblesTopBottom = (function () {
     }
     BubblesTopBottom.prototype.getRandomArbitary = function (min, max) {
         return Math.random() * (max - min) + min;
-    };
-    BubblesTopBottom.prototype.getRandomColor = function () {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
     };
     BubblesTopBottom.prototype.ngOnInit = function () {
         var self = this;
@@ -43,10 +36,13 @@ var BubblesTopBottom = (function () {
         self.svg.attr("height", this.chartHeight)
             .attr("width", this.chartWidth);
         for (var i = 0; i < (window.innerWidth / 10); i = i + 2) {
+            var colorIndex = i + 1;
+            var _color = "hsl(" + colorIndex + ", 100%, 50%)";
             self._data.push({
-                x: self.getRandomArbitary(i, window.innerWidth),
+                x: i * 20,
                 y: self.getRandomArbitary(10, 35),
                 r: self.getRandomArbitary(15, 30),
+                color: _color
             });
         }
         this.renderBubbles();
@@ -63,7 +59,10 @@ var BubblesTopBottom = (function () {
                 .attr("cy", function (d) {
                 return list.y;
             })
-                .style("fill", function () { return self.getRandomColor(); });
+                .style("fill", function () {
+                return list.color;
+                //    return self.getRandomColor() 
+            });
         });
     };
     BubblesTopBottom = __decorate([
