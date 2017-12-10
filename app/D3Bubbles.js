@@ -16,11 +16,11 @@ var D3Bubbles = (function () {
         var g = (rgb >> 8) & 0xff;
         var b = (rgb >> 0) & 0xff;
         var result = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        if (result < 160) {
-            return true;
+        if (result < 100) {
+            return false;
         }
         else {
-            return false;
+            return true;
         }
     };
     D3Bubbles.prototype.gradientTheColor = function (colorcode, freq) {

@@ -25,12 +25,12 @@ export class D3Bubbles{
         var b = (rgb >> 0) & 0xff;
 
         var result =  0.2126 * r + 0.7152 * g + 0.0722 * b
-        if(result<160){
-            return true;
+        if(result<100){
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }        
 
     }
