@@ -16,7 +16,7 @@ export class D3Bubbles{
     
     isDarkColor (colorCode){
         // remove hash character from string
-        var rawColor = colorCode.substring(1,colorCode.length());
+        var rawColor = colorCode.substring(1,colorCode.length);
 
 // convert hex string to int
         let rgb = Number.parseInt(rawColor, 16);
@@ -25,7 +25,7 @@ export class D3Bubbles{
         var b = (rgb >> 0) & 0xff;
 
         var result =  0.2126 * r + 0.7152 * g + 0.0722 * b
-        if(result<40){
+        if(result<160){
             return true;
         }
         else
@@ -39,12 +39,14 @@ export class D3Bubbles{
         var gradientColor = this.SVGContainer.append("defs")
         .append("radialGradient")
         .attr("id", "radial-gradient" + colorcode);
-        var centerColor = colorcode;
+        var centerColor = "black";
       
-        //if(this.isDarkColor(colorcode)==false)
+        if(this.isDarkColor(colorcode)==false){
+            centerColor = colorcode;
+        }
         gradientColor.append("stop")
         .attr("offset", "60%")
-        .attr("stop-color","black")
+        .attr("stop-color",centerColor)
        // .style("opacity", 0.5);
 
         gradientColor.append("stop")
@@ -151,6 +153,7 @@ export class D3Bubbles{
    
 
     this.decorateCommentBubbles();
+    var self= this;
   
      var text = d3.selectAll(".circle").append("text")
    
@@ -184,7 +187,11 @@ export class D3Bubbles{
                 return d.r/2.3+"px";})
                 
             .attr("font-family","'Segoe UI', Tahoma, Geneva, Verdana, sans-serif")
-             .style("fill", function(d){return d.data.color});
+             .style("fill", function(d){
+                 if(self.isDarkColor(d.data.color)==false){
+                     return "black";
+                 }
+                 return d.data.color});
            /*  .style("fill", function(d) { 
                        me.gradientTheColor(d.data.color, d.data.rfreq)
                        return "url(#radial-gradient"+d.data.color+")"; })*/

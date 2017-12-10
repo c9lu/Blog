@@ -9,14 +9,14 @@ var D3Bubbles = (function () {
     }
     D3Bubbles.prototype.isDarkColor = function (colorCode) {
         // remove hash character from string
-        var rawColor = colorCode.substring(1, colorCode.length());
+        var rawColor = colorCode.substring(1, colorCode.length);
         // convert hex string to int
         var rgb = Number.parseInt(rawColor, 16);
         var r = (rgb >> 16) & 0xff;
         var g = (rgb >> 8) & 0xff;
         var b = (rgb >> 0) & 0xff;
         var result = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        if (result < 40) {
+        if (result < 160) {
             return true;
         }
         else {
@@ -27,11 +27,13 @@ var D3Bubbles = (function () {
         var gradientColor = this.SVGContainer.append("defs")
             .append("radialGradient")
             .attr("id", "radial-gradient" + colorcode);
-        var centerColor = colorcode;
-        //if(this.isDarkColor(colorcode)==false)
+        var centerColor = "black";
+        if (this.isDarkColor(colorcode) == false) {
+            centerColor = colorcode;
+        }
         gradientColor.append("stop")
             .attr("offset", "60%")
-            .attr("stop-color", "black");
+            .attr("stop-color", centerColor);
         // .style("opacity", 0.5);
         gradientColor.append("stop")
             .attr("offset", "80%")
@@ -101,6 +103,7 @@ var D3Bubbles = (function () {
             return "url(#radial-gradient" + d.data.color + ")";
         });
         this.decorateCommentBubbles();
+        var self = this;
         var text = d3.selectAll(".circle").append("text")
             .attr("text-anchor", "middle")
             .attr("id", function (d) {
@@ -133,7 +136,12 @@ var D3Bubbles = (function () {
             return d.r / 2.3 + "px";
         })
             .attr("font-family", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif")
-            .style("fill", function (d) { return d.data.color; });
+            .style("fill", function (d) {
+            if (self.isDarkColor(d.data.color) == false) {
+                return "black";
+            }
+            return d.data.color;
+        });
         /*  .style("fill", function(d) {
                     me.gradientTheColor(d.data.color, d.data.rfreq)
                     return "url(#radial-gradient"+d.data.color+")"; })*/
