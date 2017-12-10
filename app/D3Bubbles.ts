@@ -142,7 +142,7 @@ export class D3Bubbles{
     var circle = d3.selectAll("."+_class+".circle").append("circle")
    
                 .attr("r", function (d) { 
-                    return d.r*1.4; 
+                    return d.r*1.2; 
                 })
                   .style("fill", function(d) { 
                        me.gradientTheColor(d.data.color, d.data.rfreq)
