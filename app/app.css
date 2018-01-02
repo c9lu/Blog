@@ -6,18 +6,17 @@
     width:32%;
     background-color:black;
     left:0;
-   display:table-cell;
+   
     position:fixed;
     overflow-x:hidden;
     z-index:1;
     background-color:black;
-    vertical-align: bottom;
 } 
 
 .column-right
 
 { 
-    display:table-cell;
+
         
      width:32%;
      right:0;
@@ -25,7 +24,7 @@
      overflow-x: hidden;
      z-index:1;
      background-color:black;
-     vertical-align:middle;
+    
 }
 
 .column-center
@@ -44,10 +43,7 @@
     
 
 }
-.sidecontainer{
-    display:table;
-    height: 100%
-}
+
 
 @media screen and (min-width: 0px) and (max-width: 800px) {
 

@@ -194,15 +194,6 @@ exports.saveComment = function(postid, comment){
 
 }
 
-exports.likePost = function(postid){
-//return s a pomise if no callback passed.
-    return dbConnect().then(
-        function(db){
-          return  db.collection('posts').update({id:parseInt(postid)},{$push:{like:1}})
-        }
-    )
-}
-
 exports.deleteComment = function(postid, commentid){
     return dbConnect().then(function(db){
 
