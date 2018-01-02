@@ -36,7 +36,7 @@ var BubblesTopBottom = (function () {
         self.svg.attr("height", this.chartHeight)
             .attr("width", this.chartWidth);
         for (var i = 0; i < (window.innerWidth / 10); i = i + 2) {
-            var colorIndex = i + 1;
+            var colorIndex = i + 100;
             var _color = "hsl(" + colorIndex + ", 100%, 50%)";
             self._data.push({
                 x: i * 20,

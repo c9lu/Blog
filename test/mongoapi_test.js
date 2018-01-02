@@ -4,7 +4,23 @@ var chaiAsPromised= require('chai-as-promised');
 var expect= chai.expect;
 var assert = chai.assert;
 
- 
+ describe("likePost",function(){
+    it('using promise', function(){
+     mongoapi.likePost(1).then((val)=>{
+         console.log("fulfilled " + val);
+     },
+     (err)=>{
+      console.log("rejected"+ err);
+     
+    }).catch(function(Err){
+        
+        console.log("update error "+Err);
+    })
+    
+
+})
+
+ });
 describe("mongoapi should return the user saved", function(){
 
  
