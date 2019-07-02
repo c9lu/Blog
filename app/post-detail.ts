@@ -6,7 +6,7 @@ import {PostCommentComponent}from './post.comment';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Params , Router} from '@angular/router';
-import {Ng2SimplePageScrollModule} from 'ng2-simple-page-scroll/ng2-simple-page-scroll';
+//import {Ng2SimplePageScrollModule} from 'ng2-simple-page-scroll/ng2-simple-page-scroll';
 import {comment} from './comment'
 //import {Injectable} from 'angular'
 @Component({
